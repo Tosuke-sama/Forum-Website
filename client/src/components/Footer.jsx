@@ -1,10 +1,11 @@
 import React from 'react'
-
+import Logo from '../img/logo.jpg'
 const Footer = () => {
   return (
-    <div>
-      
-    </div>
+   <footer>
+    <img src={Logo} />
+    <span> Tosuke 敬上 </span>
+   </footer>
   )
 }
 

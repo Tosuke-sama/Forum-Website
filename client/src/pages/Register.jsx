@@ -8,11 +8,15 @@ const register = () => {
       <form action="">
         <div>
             <div className='input-text'>用户名</div>
-            <input type="text" placeholder='用户名' />
+            <input required type="text" placeholder='用户名' />
+        </div>
+        <div>
+        <div  className='input-text'>电子邮件</div>
+        <input  required type="text" placeholder='电子邮件' /> 
         </div>
         <div>
         <div  className='input-text'>密码</div>
-        <input type="password" placeholder='密码' /> 
+        <input required type="password" placeholder='密码' /> 
         </div>
         <button>登录</button>
         <p>出现错误</p>
