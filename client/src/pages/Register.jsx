@@ -1,7 +1,14 @@
 import React from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const register = () => {
+  const [input,setInput]= useState({
+    username: '',
+    email: '',
+    password: '',
+  })
+
   return (
     <div className='auth'>
       <h1>Login</h1>
