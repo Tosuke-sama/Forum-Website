@@ -51,7 +51,7 @@ export const login = (req, res) => {
         else{
            const ispasswordCurrent = bcrypt.compareSync(password, result[0].password)
               if(!ispasswordCurrent) {
-                res.status(409).json({"message":"用户名或密码错误"})
+                res.status(404).json({"message":"用户名或密码错误"})
               }else{
                 const {password,...others} = result[0]
                 //用户验证成功，生成token
@@ -68,5 +68,8 @@ export const login = (req, res) => {
     })
 }
 export const loginout = (req, res) => {
-    res.json({ message: "loginout successfully" });
+    res.clearcookie("access_token",{
+        sameSite:"none",
+        secure:true,
+    }).status(200).json({ message: "loginout successfully" });
 }
