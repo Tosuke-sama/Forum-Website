@@ -14,6 +14,7 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router-dom";
+import { AuthContextProvider } from './context/authContext.js';
 const Latout = () => {
   return (
     <div>
@@ -47,7 +48,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <div className='app'>
       <div className='container'>
+        <AuthContextProvider>
         <RouterProvider router={router} />
+        </AuthContextProvider>
       </div>
     </div>
   </React.StrictMode>,
