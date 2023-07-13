@@ -1,38 +1,62 @@
-import React from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import Edit from '../img/edit.png'
 import Delete from '../img/delete.png'
-import { Link } from 'react-router-dom'
+import { Link,useLocation, useNavigate } from 'react-router-dom'
 import Menu from '../components/Menu'
+import moment from 'moment'
+import {AuthContext} from '../context/authContext'
+import axios from 'axios'
+import 'moment/dist/locale/zh-cn'
+moment.locale('zh-cn')
 function Single() {
+  const [post,setPost] = useState({});
+  const location = useLocation();
+  const postId = location.pathname.split('/')[2];
+  const  { currentUser } = useContext(AuthContext)
+  const navigator = useNavigate();
+  useEffect(()=>{
+    const fetchData = async () => {
+      try{
+        const res = await axios.get(`/posts/${postId}`)
+        setPost(res.data)
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetchData();
+  },[postId])
+  moment.locale('zh-cn');
+
+  const handleDelete = async () => {
+    try{
+      await axios.delete(`/posts/${postId}`)
+      navigator("/")
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   return (
     <div className='single'>
       <div className="content">
-        <img src="https://s3.bmp.ovh/imgs/2023/06/12/a69ebf2991164207.jpg" alt="" />
+       {post.img && <img src={post?.img} alt="" />}
         <div className="user">
-          <img src="https://s3.bmp.ovh/imgs/2023/06/12/a69ebf2991164207.jpg" alt="" />
+          <img src={post?.userImg} alt="" />
           <div className="info">
-            <span>Tosuke</span>
-            <p> 2天前发布</p>
+            <span>{post?.username}</span>
+            <p> {moment(post.date).fromNow()} 前发布</p>
           </div>
-          <div className="edit">
-            <Link to="/write?edit=2">
+       { currentUser.id === post.uid && <div className="edit">
+            <Link to="/write?edit=2" state={post}>
               <img src={Edit} alt="" />
             </Link>
-            <img src={Delete} alt="" />
-          </div>
+            <img src={Delete} onClick={handleDelete} alt="" />
+          </div>}
         </div>
-        <h1>时间、世界与冒险</h1>
-        <p>
-          “万物皆有裂痕，是光进来的地方”
-          暴雨如期而至。
-          <br />
-          雨珠打翻了枯叶，搅混了池塘，空中弥漫着泥土的气息，池塘里的鱼群惊慌失措，仿佛因为看不清前途命运而焦躁不安。<br />
-          叶瑾介当时也是在这种时候到达新泽的。<br />
-          虽说新泽阴雨连绵，很少能够见到阳光，但对于参加过高考的叶瑾介来说，这注定会是他通往梦想的地方。
-
-        </p>
+        <h1>{post.title}</h1>
+       {post.content}
       </div>
-      <div className="menu"><Menu></Menu></div>
+      <div className="menu"><Menu cat={post.cat}></Menu></div>
     </div>
   )
 }

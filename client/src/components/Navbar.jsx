@@ -8,17 +8,19 @@ const Navbar = () => {
     <div className='navbar'>
       <div className="container">
         <div className="logo">
+          <Link to="/"> 
           <img src={Logo} alt="" />
+          </Link>
         </div>
         <div className="links">
-          <Link className='link' to="/?cat=savor"><h6>鉴赏</h6></Link>
-          <Link className='link' to="/?cat=collection"><h6>收藏</h6></Link>
-          <Link className='link' to="/?cat=exhibition"><h6>展览</h6></Link>
-          <Link className='link' to="/?cat=artist"><h6>艺术家</h6></Link>
-          <Link className='link' to="/?cat=about"><h6>关于</h6></Link>
-          <span> {currentUser?.username}</span>
-        {currentUser? <span className='' onClick={logout}> 注销</span>:<Link className='link' to="/login">登录</Link>}
-          <span className='Write'> <Link className='link'>写文章</Link>  </span>
+          <Link className='link' to="/?cat=normal"><h6>日常</h6></Link>
+          <Link className='link' to="/?cat=study"><h6>学习</h6></Link>
+          <Link className='link' to="/?cat=time"><h6>时间</h6></Link>
+          <Link className='link' to="/?cat=world"><h6>世界</h6></Link>
+          <Link className='link' to="/?cat=adventure"><h6>冒险</h6></Link>
+          <span className='link'> {currentUser?.username}</span>
+        {currentUser? <span className='link' onClick={logout}> 注销</span>:<Link className='link' to="/login">登录</Link>}
+          <span className='Write'> <Link className='link' to='/write'>写文章</Link>  </span>
         </div>
       </div>
     </div>

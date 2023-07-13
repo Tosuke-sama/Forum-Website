@@ -1,8 +1,28 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import moment from 'moment';
+
 const Write = () => {
-  const [value, setValue] = useState('');
+  const state = useLocation().state;
+  const [value, setValue] = useState(state?.content||'');
+  const [title, setTitle] = useState(state?.title||'');
+  const [img, setImg] = useState(null);
+  const [cat, setCat] = useState(state?.cat||'');
+
+  const upload = async ()=>{
+    try{
+      const formData = new FormData();
+      formData.append('file',img);
+      const res = await axios.post('/upload',formData);
+      return res.data
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   const modules = {
     toolbar: [
       [{ 'header': [1, 2, false] }],
@@ -11,11 +31,30 @@ const Write = () => {
       ['link', 'image'],
       ['clean']
     ],
+  };
+  
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+     const imgUrl = upload();
+     try {
+      state ? await axios.put(`post/${state.id}`,{
+        title,
+        desc:"jio",
+        content:value,
+        cat,
+        img:file ? imgUrl : ""
+      }): await axios.post('/posts/',{title, desc:"jio",content:value,cat, img:file ? imgUrl : "",date:moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")});
+
+     } catch (error) {
+      console.log(error);
+     }
+
   }
+
   return (
     <div className='add'>
       <div className="content">
-       <input type="text" placeholder='Title' />
+       <input type="text" placeholder='Title' onChange={e=>setTitle(e.target.value)} value={title} />
       <div className="editorContent">
       <ReactQuill className='editorContainer' modules={modules} theme="snow" value={value} onChange={setValue} />
       </div>
@@ -25,32 +64,32 @@ const Write = () => {
           <h1>发布</h1>
           <span> <b> 状态：</b> 草稿 </span>
           <span> <b> 可见性：</b> 公开 </span>
-          <input type="file" name='' id='file' />
+          <input type="file" name='' id='file' onChange={e=>setImg(e.target.files[0])}/>
           <div className="buttons">
             <button> 保存为草稿 </button>
-            <button> 更新 </button>
+            <button onClick={handleSubmit}> 发布 </button>
           </div>
         </div>
         <div className="item">
           <h1>分类</h1>
           <div className="cat">
-          <input type="radio" name='cat' id='normal'/>
+          <input type="radio" checked={ cat === "normal"} name='cat' id='normal'  onChange={e=>setCat(e.target.value)} />
           <label htmlFor="normal"> 日常 </label>
           </div>
           <div className="cat">
-          <input type="radio" name='cat' id='study'/>
+          <input type="radio" checked={ cat === "study"} name='cat' id='study'  onChange={e=>setCat(e.target.value)} />
           <label htmlFor="study"> 学习 </label>
           </div>
           <div className="cat">
-          <input type="radio" name='cat' id='time'/>
+          <input type="radio" checked={ cat === "time"} name='cat' id='time'  onChange={e=>setCat(e.target.value)}/>
           <label htmlFor="time"> 时间 </label>
           </div>
           <div className="cat">
-          <input type="radio" name='cat' id='world'/>
+          <input type="radio" checked={ cat === "world"} name='cat' id='world'  onChange={e=>setCat(e.target.value)}/>
           <label htmlFor="world"> 世界 </label>
           </div>
           <div className="cat">
-          <input type="radio" name='cat' id='adventure'/>
+          <input type="radio" checked={ cat === "adventure"} name='cat' id='adventure'  onChange={e=>setCat(e.target.value)}/>
           <label htmlFor="adventure"> 冒险 </label>
           </div>
         </div>
