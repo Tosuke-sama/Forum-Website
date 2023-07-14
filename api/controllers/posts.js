@@ -18,7 +18,26 @@ export const getPost = (req, res) => {
 }
 
 export const addPost = (req, res) => {
-    res.json({ message: "Post added successfully" });
+    const token = req.cookies.access_token;
+    if(!token) return res.status(401).json({message:"请先登录"})
+    jwt.verify(token,"Tosuke",(err,decoded)=>{
+        if(err) return res.status(401).json({message:"请先登录"})
+        const q = "INSERT INTO posts(`title`,`desc`,`img`,`content`,`cat`,`date`,`uid`) VALUES (?)";
+        const values = [
+            req.body.title,
+            req.body.desc,
+            req.body.img,
+            req.body.content,
+            req.body.cat,
+            req.body.date,
+            decoded.id
+        ];
+        db.query(q,[values],(err,result)=>{
+            if(err) return res.status(500).json(err)
+            res.status(200).json({message:"添加帖子成功"})
+        })
+       
+    })
 }
 export const deletePost = (req, res) => {
     const token = req.cookies.access_token;
@@ -41,5 +60,24 @@ export const deletePost = (req, res) => {
 
 }
 export const updatePost = (req, res) => {
-    res.json({ message: "Post added successfully" });
+    const token = req.cookies.access_token;
+    if(!token) return res.status(401).json({message:"请先登录"})
+    jwt.verify(token,"Tosuke",(err,decoded)=>{
+        if(err) return res.status(401).json({message:"请先登录"})
+        const postId = req.params.id;
+        const q = "UPDATE posts SET `title`=?,`desc`= ?,`img`=?,`cat`= ? WHERE  `id`= ? AND `uid` = ?";
+        const values = [
+            req.body.title,
+            req.body.desc,
+            req.body.img,
+            req.body.cat,
+            req.body.date,
+            decoded.id
+        ];
+        db.query(q,[...values,postId,userInfo.id],(err,result)=>{
+            if(err) return res.status(500).json(err)
+            res.status(200).json({message:"更新帖子成功"})
+        })
+       
+    })
 }

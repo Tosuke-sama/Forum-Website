@@ -49,7 +49,7 @@ const Menu = ({cat}) => {
       <h1> 或许可以看看</h1>
       {posts.map((post) => (
             <div className="post" key={post.id}>
-                <img src={post.img} alt="" />
+                <img src={`../upload/${post?.img}`} alt="" />
                 <h2>{post.title}</h2>
                 <button> 阅读更多 </button>
             </div>

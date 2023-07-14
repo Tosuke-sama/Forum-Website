@@ -43,7 +43,10 @@ const Home = () => {
   //     img: "https://s3.bmp.ovh/imgs/2023/06/12/a69ebf2991164207.jpg"
   //   }
   // ]
-
+  const getText = (text) => {
+    const doc = new DOMParser().parseFromString(text, 'text/html');
+    return doc.body.textContent || "";
+  }
 
 
   return (
@@ -52,13 +55,13 @@ const Home = () => {
         {posts.map((post) => (
           <div className="post" key={post.id}>
             <div className="img">
-              <img src={post.img} alt="" />
+              <img src={`../upload/${post.img}`} alt="" />
             </div>
             <div className="content">
               <Link className='link' to={`/post/${post.id}`}>
                 <h1> { post.title}</h1> 
               </Link>
-                <p> {post.desc}</p>
+                <p> {getText(post.desc)}</p>
                 <button> 阅读更多</button>
                
             </div>

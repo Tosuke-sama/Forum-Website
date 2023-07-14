@@ -35,15 +35,15 @@ const Write = () => {
   
   const handleSubmit = async (e) => {
       e.preventDefault();
-     const imgUrl = upload();
+     const imgUrl = await upload();
      try {
       state ? await axios.put(`post/${state.id}`,{
         title,
-        desc:"jio",
+        desc:value.slice(0,50)+"...",
         content:value,
         cat,
         img:file ? imgUrl : ""
-      }): await axios.post('/posts/',{title, desc:"jio",content:value,cat, img:file ? imgUrl : "",date:moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")});
+      }): await axios.post('/posts/',{title, desc:value.slice(0,50)+"...",content:value,cat, img:file ? imgUrl : "",date:moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")});
 
      } catch (error) {
       console.log(error);
@@ -73,23 +73,23 @@ const Write = () => {
         <div className="item">
           <h1>分类</h1>
           <div className="cat">
-          <input type="radio" checked={ cat === "normal"} name='cat' id='normal'  onChange={e=>setCat(e.target.value)} />
+          <input type="radio" checked={ cat === "normal"} name='cat' id='normal'  onChange={e=>setCat(e.target.id)} />
           <label htmlFor="normal"> 日常 </label>
           </div>
           <div className="cat">
-          <input type="radio" checked={ cat === "study"} name='cat' id='study'  onChange={e=>setCat(e.target.value)} />
+          <input type="radio" checked={ cat === "study"} name='cat' id='study'  onChange={e=>setCat(e.target.id)} />
           <label htmlFor="study"> 学习 </label>
           </div>
           <div className="cat">
-          <input type="radio" checked={ cat === "time"} name='cat' id='time'  onChange={e=>setCat(e.target.value)}/>
+          <input type="radio" checked={ cat === "time"} name='cat' id='time'  onChange={e=>setCat(e.target.id)}/>
           <label htmlFor="time"> 时间 </label>
           </div>
           <div className="cat">
-          <input type="radio" checked={ cat === "world"} name='cat' id='world'  onChange={e=>setCat(e.target.value)}/>
+          <input type="radio" checked={ cat === "world"} name='cat' id='world'  onChange={e=>setCat(e.target.id)}/>
           <label htmlFor="world"> 世界 </label>
           </div>
           <div className="cat">
-          <input type="radio" checked={ cat === "adventure"} name='cat' id='adventure'  onChange={e=>setCat(e.target.value)}/>
+          <input type="radio" checked={ cat === "adventure"} name='cat' id='adventure'  onChange={e=>setCat(e.target.id)}/>
           <label htmlFor="adventure"> 冒险 </label>
           </div>
         </div>
