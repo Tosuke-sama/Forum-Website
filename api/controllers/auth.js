@@ -14,13 +14,13 @@ export const register = (req, res) => {
                 res.status(409).json({ message: "用户已存在！" });
             }
             else {
-                const q = "INSERT INTO users(`username`,`email`,`password`) VALUES (?)";
+                const q1 = "INSERT INTO users(`username`,`email`,`password`) VALUES (?)";
                 //将密码进行加密
                 const salt = bcrypt.genSaltSync(10);
                 const hash = bcrypt.hashSync(password, salt);
-                const user = [username, hash]   //user is an array of values to be inserted in the table;
+                const user = [username, email,hash]   //user is an array of values to be inserted in the table;
                 
-                db.query(q,[email, username], (err, result) => {
+                db.query(q1,[[username, email,hash]], (err, result) => {
                     if (err) {
                         console.log(err);
                     }
@@ -34,6 +34,7 @@ export const register = (req, res) => {
  
     
 }
+
 export const login = (req, res) => {
     //查看用户是否存在
     const q = "SELECT * FROM users WHERE username = ?";

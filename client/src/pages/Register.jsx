@@ -44,7 +44,7 @@ const register = () => {
         <div  className='input-text'>密码</div>
         <input required type="password" placeholder='输入密码' name='password' onChange={handleChange} /> 
         </div>
-        <button onClick={register}>登录</button>
+        <button onClick={register}>注册</button>
         { err && <p>{err}</p>}
         <span> 已拥有账户？<Link to={"/login"}>点击登录</Link></span>
       </form>

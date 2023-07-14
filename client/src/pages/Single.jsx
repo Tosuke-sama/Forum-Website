@@ -7,6 +7,7 @@ import moment from 'moment'
 import {AuthContext} from '../context/authContext'
 import axios from 'axios'
 import 'moment/dist/locale/zh-cn'
+import ReactHtmlParser from 'react-html-parser';
 moment.locale('zh-cn')
 function Single() {
   const [post,setPost] = useState({});
@@ -39,6 +40,7 @@ function Single() {
     const doc = new DOMParser().parseFromString(text, 'text/html');
     return doc.body.textContent || "";
   }
+
   return (
     <div className='single'>
       <div className="content">
@@ -49,15 +51,18 @@ function Single() {
             <span>{post?.username}</span>
             <p> {moment(post.date).fromNow()} 前发布</p>
           </div>
-       { currentUser.id === post.uid && <div className="edit">
+       { currentUser != null? currentUser?.id === post.uid && <div className="edit">
             <Link to="/write?edit=2" state={post}>
               <img src={Edit} alt="" />
             </Link>
             <img src={Delete} onClick={handleDelete} alt="" />
-          </div>}
+          </div> : null}
         </div>
         <h1>{post.title}</h1>
-       {post.content}
+        <div>
+        {ReactHtmlParser(post.content)}
+        </div>
+      
       </div>
       <div className="menu"><Menu cat={post.cat}></Menu></div>
     </div>

@@ -65,16 +65,15 @@ export const updatePost = (req, res) => {
     jwt.verify(token,"Tosuke",(err,decoded)=>{
         if(err) return res.status(401).json({message:"请先登录"})
         const postId = req.params.id;
-        const q = "UPDATE posts SET `title`=?,`desc`= ?,`img`=?,`cat`= ? WHERE  `id`= ? AND `uid` = ?";
+        const q = "UPDATE posts SET `title`=?,`desc`= ?,`content`=?,`img`=?,`cat`= ? WHERE  `id`= ? AND `uid` = ?";
         const values = [
             req.body.title,
             req.body.desc,
+            req.body.content,
             req.body.img,
             req.body.cat,
-            req.body.date,
-            decoded.id
         ];
-        db.query(q,[...values,postId,userInfo.id],(err,result)=>{
+        db.query(q,[...values,postId,decoded.id],(err,result)=>{
             if(err) return res.status(500).json(err)
             res.status(200).json({message:"更新帖子成功"})
         })

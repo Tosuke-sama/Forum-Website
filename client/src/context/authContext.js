@@ -9,8 +9,8 @@ export const AuthContextProvider = ({ children }) => {
     const login = async (inputs)=> {
         try{
            const res = await axios.post("/auth/login",inputs);   
-               setCurrentUser(res.data)
-               console.log(res.data)   
+            setCurrentUser(res.data)
+            console.log(res.data)   
         }catch(err){
             console.log(err);
             throw err;

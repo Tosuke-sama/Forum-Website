@@ -1,8 +1,5 @@
 $lightGrenn : #04cfc1e0;
 $imgBack : #04cfc1e0;
-p{
-    white-space: pre-wrap;
-}
 .app{
     display: flex;
     justify-content: center;
@@ -143,6 +140,7 @@ p{
             .post{
                 display: flex;
                 gap:80px;
+                position: relative;
                 &:nth-child(2n+1){
                     flex-direction: row-reverse;
                     .img{
@@ -179,7 +177,8 @@ p{
                    
                     img{
                         width: 100%;
-                        max-height: 400px;
+                        height: 100%;
+                        // max-height: 400px;
                         object-fit: cover;
                     }
                 }
