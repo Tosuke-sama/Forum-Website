@@ -4,7 +4,7 @@ $imgBack : #04cfc1e0;
     display: flex;
     justify-content: center;
     .container{
-        width: 1024px;
+       
         .link{
             text-decoration: none;
             color: inherit;          
@@ -12,6 +12,7 @@ $imgBack : #04cfc1e0;
         //Login&&register
     .auth{
         display:flex;
+        width: 100vw;
         align-items: center;
         flex-direction: column;
         justify-content: center;
@@ -95,6 +96,12 @@ $imgBack : #04cfc1e0;
                 span{
                     cursor: pointer;
                 }
+                img{
+                    width: 20px;
+                    height: 20px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
                 .Write{
                     height: 40px;
                     width: 70px;
@@ -131,7 +138,7 @@ $imgBack : #04cfc1e0;
     }
     //Home
     .home{
-
+        
         .posts{
             margin-top: 50px;
             display: flex;
@@ -381,4 +388,7 @@ $imgBack : #04cfc1e0;
 
 }   
     
+}
+.content{
+    width: 1024px;
 }

@@ -36,13 +36,9 @@ function Single() {
       console.log(err)
     }
   }
-  const getText = (text) => {
-    const doc = new DOMParser().parseFromString(text, 'text/html');
-    return doc.body.textContent || "";
-  }
 
   return (
-    <div className='single'>
+    <div className='single content'>
       <div className="content">
        {post.img && <img src={`../upload/${post?.img}`} alt="" />}
         <div className="user">

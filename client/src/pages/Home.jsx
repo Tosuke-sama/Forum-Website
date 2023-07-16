@@ -51,7 +51,7 @@ const Home = () => {
 
 
   return (
-    <div className='home'>
+    <div className='home content'>
       <div className="posts">
         {posts.map((post) => (
           <div className="post" key={post.id}>
@@ -60,7 +60,7 @@ const Home = () => {
             </div>
             <div className="content">
               <Link className='link' to = {`/post/${post.id}`}>
-                <h1> { post.title}</h1> 
+                <h1> { post.title} </h1> 
               </Link>
                 <p> {ReactHtmlParser(post.desc)}</p>
                 <Link className='link' to = {`/post/${post.id}`}>

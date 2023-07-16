@@ -13,15 +13,29 @@ const register = () => {
     password: '',
   });
   const [err,setErr] = useState('')
+  const [img, setImg] = useState(null);
 
   const navigate = useNavigate();
+
+  const upload = async ()=>{
+    try{
+      const formData = new FormData();
+      formData.append('file',img);
+      const res = await axios.post('/upload/avater',formData);
+      return res.data;
+    }catch(err){
+      console.log(err)
+    }
+  }
+
   const handleChange = (e) => {
     setInput(prev=>({...prev,[e.target.name]:e.target.value}))
   }
   const register = async (e) => { 
     e.preventDefault()
     try{
-      const res = await axios.post('/auth/register',input)
+      const imgUrl = await upload();
+      const res = await axios.post('/auth/register',{...input,imgUrl});
       navigate('/login');
     }catch(err){
       console.log(err)
@@ -43,6 +57,10 @@ const register = () => {
         <div>
         <div  className='input-text'>密码</div>
         <input required type="password" placeholder='输入密码' name='password' onChange={handleChange} /> 
+        </div>
+        <div>
+        <div className='input-text'>头像</div>
+        <input required type='file'  onChange={e=>setImg(e.target.files[0])} /> 
         </div>
         <button onClick={register}>注册</button>
         { err && <p>{err}</p>}

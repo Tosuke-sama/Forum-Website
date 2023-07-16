@@ -18,7 +18,7 @@ app.use("/api/user",userrouter);
 app.use("/api/posts",postrouter);
 
 
-const storage = multer.diskStorage({
+const storageImg = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, '../client/public/upload')
     },
@@ -26,16 +26,31 @@ const storage = multer.diskStorage({
       cb(null, Date.now() + file.originalname )
     }
   })
+  const storageAvater = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../client/public/avater')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + file.originalname )
+    }
+  })
   
   const upload = multer({ 
-    storage
+    storage:storageImg
 })
+  const uploadAvater = multer({ 
+  storage:storageAvater
+})
+
 app.post('/api/upload', upload.single('file'), (req, res) => {
-  
     const file = req.file
     res.status(200).json(file.filename)
 })
-    
+//文章图片上传
+app.post('/api/upload/avater', uploadAvater.single('file'), (req, res) => {
+  const file = req.file
+  res.status(200).json(file.filename)
+})
 
 app.get("/",(req,res)=>{
     res.send("Hello World");

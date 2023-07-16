@@ -19,7 +19,8 @@ const Navbar = () => {
           <Link className='link' to="/?cat=world"><h6>世界</h6></Link>
           <Link className='link' to="/?cat=adventure"><h6>冒险</h6></Link>
           <span className='link'> {currentUser?.username}</span>
-        {currentUser? <span className='link' onClick={logout}> 注销</span>:<Link className='link' to="/login">登录</Link>}
+          {currentUser.img?<img src={`../avater/${currentUser.img}`} alt="" />:""}
+          {currentUser? <span className='link' onClick={logout}> 注销</span>:<Link className='link' to="/login">登录</Link>}
           <span className='Write'> <Link className='link' to='/write'>写文章</Link>  </span>
         </div>
       </div>

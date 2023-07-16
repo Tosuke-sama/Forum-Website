@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 export const register = (req, res) => {
     //查看用户是否存在
     const q = "SELECT * FROM users WHERE email = ? OR username = ?";
-    const { username, email, password } = req.body;
+    const { username, email, password,imgUrl } = req.body;
     db.query(q, [email, username], (err, result) => {
         if (err) {
             console.log(err);
@@ -14,13 +14,13 @@ export const register = (req, res) => {
                 res.status(409).json({ message: "用户已存在！" });
             }
             else {
-                const q1 = "INSERT INTO users(`username`,`email`,`password`) VALUES (?)";
+                const q1 = "INSERT INTO users(`username`,`email`,`password`,`img`) VALUES (?)";
                 //将密码进行加密
                 const salt = bcrypt.genSaltSync(10);
                 const hash = bcrypt.hashSync(password, salt);
                 const user = [username, email,hash]   //user is an array of values to be inserted in the table;
-                
-                db.query(q1,[[username, email,hash]], (err, result) => {
+                console.log(req.body)
+                db.query(q1,[[username, email,hash,imgUrl]], (err, result) => {
                     if (err) {
                         console.log(err);
                     }

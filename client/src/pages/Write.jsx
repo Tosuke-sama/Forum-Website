@@ -19,7 +19,6 @@ const Write = () => {
       const formData = new FormData();
       formData.append('file',img);
       const res = await axios.post('/upload',formData);
-      return res.data
     }catch(err){
       console.log(err)
     }
@@ -54,7 +53,7 @@ const Write = () => {
   }
 
   return (
-    <div className='add'>
+    <div className='add content'>
       <div className="content">
        <input type="text" placeholder='Title' onChange={e=>setTitle(e.target.value)} value={title} />
       <div className="editorContent">
