@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 
-axios.defaults.baseURL='http://localhost:3000/api';
+axios.defaults.baseURL='http://47.109.110.1:3000/api';
 axios.defaults.withCredentials=true
 const register = () => {
   const [input,setInput]= useState({

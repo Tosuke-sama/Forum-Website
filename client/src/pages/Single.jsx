@@ -25,6 +25,7 @@ function Single() {
       }
     }
     fetchData();
+    
   },[postId])
   moment.locale('zh-cn');
 
@@ -36,13 +37,12 @@ function Single() {
       console.log(err)
     }
   }
-
   return (
     <div className='single content'>
       <div className="content">
        {post.img && <img src={`../upload/${post?.img}`} alt="" />}
         <div className="user">
-          <img src={post?.userImg} alt="" />
+          <img src={`../avater/${post?.userImg}`} alt="" />
           <div className="info">
             <span>{post?.username}</span>
             <p> {moment(post.date).fromNow()} 前发布</p>

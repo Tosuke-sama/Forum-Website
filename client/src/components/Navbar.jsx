@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import{ AuthContext} from '../context/authContext'
 const Navbar = () => {
   const  { currentUser ,logout} = useContext(AuthContext)
+  console.log(currentUser)
   return (
     <div className='navbar'>
       <div className="container">
@@ -19,7 +20,7 @@ const Navbar = () => {
           <Link className='link' to="/?cat=world"><h6>世界</h6></Link>
           <Link className='link' to="/?cat=adventure"><h6>冒险</h6></Link>
           <span className='link'> {currentUser?.username}</span>
-          {currentUser.img?<img src={`../avater/${currentUser.img}`} alt="" />:""}
+          {currentUser && currentUser.img!=""?<img src={"../avater/" + currentUser.img} alt="" />:<img src="../avater/default.jpg"alt="" />}
           {currentUser? <span className='link' onClick={logout}> 注销</span>:<Link className='link' to="/login">登录</Link>}
           <span className='Write'> <Link className='link' to='/write'>写文章</Link>  </span>
         </div>

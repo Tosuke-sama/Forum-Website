@@ -19,6 +19,7 @@ const Write = () => {
       const formData = new FormData();
       formData.append('file',img);
       const res = await axios.post('/upload',formData);
+      return res.data
     }catch(err){
       console.log(err)
     }
@@ -35,7 +36,6 @@ const Write = () => {
   };
   
   const handleSubmit = async (e) => {
-      e.preventDefault();
      const imgUrl = await upload();
      try {
       state ? await axios.put(`/posts/${state.id}`,{
@@ -43,8 +43,8 @@ const Write = () => {
         desc:value.slice(0,50)+"...",
         content:value,
         cat,
-        img:file ? imgUrl : ""
-      }): await axios.post('/posts/',{title, desc:value.slice(0,50)+"...",content:value,cat, img:file ? imgUrl : "",date:moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")});
+        img:imgUrl!= null ? imgUrl : ""
+      }): await axios.post('/posts/',{title, desc:value.slice(0,50)+"...",content:value,cat, img:imgUrl!= null ? imgUrl : "",date:moment(Date.now()).format("YYYY-MM-DD HH:mm:ss")});
       navigate('/');
      } catch (error) {
       console.log(error);
