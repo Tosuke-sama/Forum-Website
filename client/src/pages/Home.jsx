@@ -1,53 +1,27 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
+import { AuthContext } from '../context/authContext'
+import { Snackbar,Alert } from '@mui/material';
 const Home = () => {
-  const [posts,setPosts] = useState([]);
+  const { open, currentUser, setOpen } = useContext(AuthContext)
+  const [posts, setPosts] = useState([]);
   const location = useLocation();
   const cat = location.search;
-  useEffect(()=>{
+  useEffect(() => {
     const fetchData = async () => {
-      try{
+      try {
         const res = await axios.get(`/posts${cat}`)
         setPosts(res.data)
-      }catch(err){
+      } catch (err) {
         console.log(err)
       }
     }
     fetchData();
-  },[cat])
+  }, [cat])
 
-  // const posts = [
-  //   {
-  //     id: 1,
-  //     title: 'Post 1',
-  //     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-  //     img: "https://s3.bmp.ovh/imgs/2023/06/12/a69ebf2991164207.jpg"
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Post 2',
-  //     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-  //     img: "https://s3.bmp.ovh/imgs/2023/06/12/a69ebf2991164207.jpg"
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Post 3',
-  //     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-  //     img: "https://s3.bmp.ovh/imgs/2023/06/12/a69ebf2991164207.jpg"
-  //   },
-  //   {
-  //     id: 4,
-  //     title: 'Post 4',
-  //     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.',
-  //     img: "https://s3.bmp.ovh/imgs/2023/06/12/a69ebf2991164207.jpg"
-  //   }
-  // ]
-  const getText = (text) => {
-    const doc = new DOMParser().parseFromString(text, 'text/html');
-    return doc.body.textContent || "";
-  }
+
 
 
   return (
@@ -59,18 +33,29 @@ const Home = () => {
               <img src={`../upload/${post.img}`} alt="" />
             </div>
             <div className="content">
-              <Link className='link' to = {`/post/${post.id}`}>
-                <h1> { post.title} </h1> 
+              <Link className='link' to={`/post/${post.id}`}>
+                <h1> {post.title} </h1>
               </Link>
-                <p> {ReactHtmlParser(post.desc)}</p>
-                <Link className='link' to = {`/post/${post.id}`}>
+              <p> {ReactHtmlParser(post.desc)}</p>
+              <Link className='link' to={`/post/${post.id}`}>
                 <button > 阅读更多</button>
-                </Link>
+              </Link>
             </div>
           </div>
         ))}
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={open}
+        autoHideDuration={3300}
+        onClose={() => { setOpen(false) }}
+      >
+        <Alert severity="success" sx={{ width: '100%' }}>
+            欢迎回来，{currentUser?.username}，爱来自京介!
+          </Alert>
+      </Snackbar>
     </div>
+
   )
 }
 

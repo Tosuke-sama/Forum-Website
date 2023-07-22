@@ -3,12 +3,14 @@ import { Link,useNavigate } from 'react-router-dom'
 import { useState,useContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from '../context/authContext'
+import {TextField,Alert } from '@mui/material';
 
 const Login = () => {
   const [input,setInput]= useState({
     username: '',
     password: '',
   });
+
   const [err,setErr] = useState('')
   const  { login } = useContext(AuthContext)
 
@@ -19,6 +21,7 @@ const Login = () => {
   }
   const handlelogin = async (e) => { 
     e.preventDefault()
+
     try{
       await login(input)
       navigate('/');
@@ -32,17 +35,15 @@ const Login = () => {
       <h1>登录</h1>
       <form action="">
         <div>
-            <div className='input-text' >用户名</div>
-            <input type="text" placeholder='用户名' name='username' onChange={handleChange} />
+            <TextField id="standard-basic" label="用户名" variant="standard" name='username' onChange={handleChange}/>
         </div>
         <div>
-        <div  className='input-text'>密码</div>
-        <input type="password" placeholder='密码' name='password' onChange={handleChange} /> 
+        <TextField id="standard-basic" label="密码" variant="standard" onChange={handleChange} name='password'  type="password"/>
         </div>
         <button onClick={handlelogin}>登录</button>
-        {err && <p>{err}</p>}
         <span> 还没有账户？<Link to={"/register"}>点击注册 </Link></span>
       </form>
+      <div> {err && <Alert severity="error">{err}</Alert>}</div>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { useLocation,useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { useEffect } from 'react';
 
 const Write = () => {
   const state = useLocation().state;
@@ -36,6 +37,17 @@ const Write = () => {
   };
   
   const handleSubmit = async (e) => {
+    if(title===""||value===""){
+      alert("标题和内容不能为空");
+      return;
+    } 
+    if(img!=null){
+      if(img.type !== "image/jpeg" && img.type !== "image/png" && img.type !== "image/jpg"){
+        alert("图片格式不正确");
+        return;
+      }
+    }
+    else return;
      const imgUrl = await upload();
      try {
       state ? await axios.put(`/posts/${state.id}`,{
@@ -55,9 +67,9 @@ const Write = () => {
   return (
     <div className='add content'>
       <div className="content">
-       <input type="text" placeholder='Title' onChange={e=>setTitle(e.target.value)} value={title} />
+       <input type="text" placeholder='Title' onChange={e=>setTitle(e.target.value)} value={title} required />
       <div className="editorContent">
-      <ReactQuill className='editorContainer' modules={modules} theme="snow" value={value} onChange={setValue} />
+      <ReactQuill className='editorContainer' modules={modules} theme="snow" value={value} onChange={setValue} required />
       </div>
       </div>
       <div className="menu">
@@ -65,6 +77,7 @@ const Write = () => {
           <h1>发布</h1>
           <span> <b> 状态：</b> 草稿 </span>
           <span> <b> 可见性：</b> 公开 </span>
+          <span><b>封面图像：</b></span>
           <input type="file" name='' id='file' onChange={e=>setImg(e.target.files[0])}/>
           <div className="buttons">
             <button> 保存为草稿 </button>

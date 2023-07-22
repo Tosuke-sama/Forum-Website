@@ -8,6 +8,8 @@ import Write from './pages/write.jsx';
 import Single from './pages/Single.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 import './style.scss'
 import {
   createBrowserRouter,
@@ -49,7 +51,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <AuthContextProvider>
     <div className='app'>
       <div className='container'>
-        <RouterProvider router={router} />
+      <RouterProvider router={router} />
       </div>
     </div>
     </AuthContextProvider>

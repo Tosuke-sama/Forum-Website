@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import {TextField,Alert } from '@mui/material';
 
-
-axios.defaults.baseURL='http://47.109.110.1:3000/api';
+axios.defaults.baseURL='http://localhost:3000/api';
 axios.defaults.withCredentials=true
 const register = () => {
   const [input,setInput]= useState({
@@ -18,6 +18,11 @@ const register = () => {
   const navigate = useNavigate();
 
   const upload = async ()=>{
+    if(img!=null){
+      if(img.type !== "image/jpeg" && img.type !== "image/png" && img.type !== "image/jpg"){
+        return;
+      }
+    }
     try{
       const formData = new FormData();
       formData.append('file',img);
@@ -33,6 +38,10 @@ const register = () => {
   }
   const register = async (e) => { 
     e.preventDefault()
+    if(input.email===''||input.password===''||input.username===''){
+      setErr('请填写完整信息')
+      return;
+    }
     try{
       const imgUrl = await upload();
       const res = await axios.post('/auth/register',{...input,imgUrl});
@@ -47,25 +56,22 @@ const register = () => {
       <h1>注册</h1>
       <form action="">
         <div>
-            <div className='input-text'>用户名</div>
-            <input required type="text" placeholder='输入用户名' name='username' onChange={handleChange}/>
+            <TextField id="standard-basic" label="用户名" variant="standard" name='username' onChange={handleChange}/>
         </div>
         <div>
-        <div  className='input-text'>电子邮件</div>
-        <input  required type="text" placeholder='输入电子邮件' name='email' onChange={handleChange} /> 
+        <TextField id="standard-basic" label="电子邮件" variant="standard" name='email' onChange={handleChange}/>
         </div>
         <div>
-        <div  className='input-text'>密码</div>
-        <input required type="password" placeholder='输入密码' name='password' onChange={handleChange} /> 
+        <TextField id="standard-basic" label="密码" variant="standard" onChange={handleChange} name='password'  type="password"/>
         </div>
         <div>
         <div className='input-text'>头像</div>
         <input required type='file'  onChange={e=>setImg(e.target.files[0])} /> 
         </div>
         <button onClick={register}>注册</button>
-        { err && <p>{err}</p>}
         <span> 已拥有账户？<Link to={"/login"}>点击登录</Link></span>
       </form>
+     <div> {err && <Alert severity="error">{err}</Alert>}</div>
     </div>
   )
 }

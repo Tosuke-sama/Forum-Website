@@ -1,5 +1,5 @@
-$lightGrenn : #04cfc1e0;
-$imgBack : #04cfc1e0;
+$lightGrenn : #b9e7e7;
+$imgBack : #b9e7e7;
 .app{
     display: flex;
     justify-content: center;
@@ -16,6 +16,7 @@ $imgBack : #04cfc1e0;
         align-items: center;
         flex-direction: column;
         justify-content: center;
+        gap: 10px;
         height: 100vh;
         background-color: $lightGrenn;
         h1{
@@ -26,7 +27,7 @@ $imgBack : #04cfc1e0;
         form{
             width: 300px;
             height: 400px;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
             justify-content: space-around;
@@ -58,7 +59,7 @@ $imgBack : #04cfc1e0;
             width: 150px;
             height: 40px;
             border-radius: 5px;
-            margin-top: 20px;
+            margin-top: 10px;
             border: none;
             padding: 5px;
             outline: none;
@@ -392,3 +393,4 @@ $imgBack : #04cfc1e0;
 .content{
     width: 1024px;
 }
+
