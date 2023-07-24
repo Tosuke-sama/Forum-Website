@@ -29,8 +29,10 @@ const Home = () => {
       <div className="posts">
         {posts.map((post) => (
           <div className="post" key={post.id}>
-            <div className="img">
+            <div className="img" >
+              <Link to={`/post/${post.id}`}>
               <img src={`../upload/${post.img}`} alt="" />
+              </Link>
             </div>
             <div className="content">
               <Link className='link' to={`/post/${post.id}`}>
@@ -50,7 +52,7 @@ const Home = () => {
         autoHideDuration={3300}
         onClose={() => { setOpen(false) }}
       >
-        <Alert severity="success" sx={{ width: '100%' }}>
+        <Alert severity="success" sx={{ width: '80%' }}>
             欢迎回来，{currentUser?.username}，爱来自京介!
           </Alert>
       </Snackbar>

@@ -47,7 +47,10 @@ const Write = () => {
         return;
       }
     }
-    else return;
+    if(cat===""){
+      alert("请选择分类");
+      return;
+    }
      const imgUrl = await upload();
      try {
       state ? await axios.put(`/posts/${state.id}`,{

@@ -1,10 +1,15 @@
 $lightGrenn : #b9e7e7;
 $imgBack : #b9e7e7;
 .app{
+    width: 100%;
     display: flex;
     justify-content: center;
     .container{
-       
+        @media (max-width: 800px) {
+            // background-color: aquamarine;
+            width: 100%;
+            
+          }
         .link{
             text-decoration: none;
             color: inherit;          
@@ -76,6 +81,40 @@ $imgBack : #b9e7e7;
     //navbar
     .navbar{
         .container{
+            @media (max-width: 800px) {
+                margin-top: 20px;
+            }
+            .mobileAvater{
+                width: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+                height: 30px;
+                gap: 10px;
+                img{
+                    width: 30px;
+                    height: 30px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+                .link{
+                    font-weight: 320;
+                    white-space: nowrap;
+                }
+                @media (min-width: 800px) {
+                    display: none;
+                }
+            }
+           .mobileNav{
+            @media (min-width: 800px) {
+                display: none;
+            }
+           }
+            @media (max-width: 800px) {
+         
+                width: 100%;
+                
+              }
             padding: 10px,0px;
             display: flex;
             align-items: center;
@@ -85,8 +124,16 @@ $imgBack : #b9e7e7;
                     width: 50px;
                     height: 50px;
                 }
+                @media (max-width: 800px) {
+                    margin-left: 10px;
+                }
             }
             .links{
+                @media (max-width: 800px) {
+                   width: 100%;
+                   gap: 0px;
+                   display: none;
+                }
                 display: flex;
                 align-items: center;
                 gap: 10px;
@@ -103,19 +150,11 @@ $imgBack : #b9e7e7;
                     object-fit: cover;
                     border-radius: 50%;
                 }
-                .Write{
-                    height: 40px;
-                    width: 70px;
-                    background-color: $lightGrenn;
-                    border-radius: 10%;
-                    text-align: center;
-                    line-height: 40px;
-                    font-weight: 300;
-                    &:hover{
-                        background-color: teal;
-                        color: white;
-                    }
+                .link{
+                    font-weight: 320;
+                    white-space: nowrap;
                 }
+//write
             }
         }
 
@@ -144,14 +183,27 @@ $imgBack : #b9e7e7;
             margin-top: 50px;
             display: flex;
             flex-direction: column;
-            gap: 150px;
+            gap: 150px; 
+            @media (max-width: 800px) {
+                width: 100%;
+                gap: 80px;
+            }
             .post{
                 display: flex;
                 gap:80px;
                 position: relative;
+                @media (max-width: 800px) {
+                    flex-direction: column;
+                    padding: 20px;
+                    gap: 50px;
+                }
                 &:nth-child(2n+1){
                     flex-direction: row-reverse;
+                    @media (max-width: 800px) {
+                        flex-direction: column;
+                    }
                     .img{
+                       
                         &::after{
                             content: "";
                             position: absolute;
@@ -161,6 +213,12 @@ $imgBack : #b9e7e7;
                             top: 20px;
                             left: 20px;
                             z-index: -1;
+                            @media (max-width: 800px) {
+                                top: -5%;
+                                left: -5%;
+                                width: 110%;
+                                height: 110%;
+                            }
                         }
                     }
                 }
@@ -175,6 +233,12 @@ $imgBack : #b9e7e7;
                             top: 20px;
                             left: -20px;
                             z-index: -1;
+                            @media (max-width: 800px) {
+                                top: -5%;
+                                left: -5%;
+                                width: 110%;
+                                height: 110%;
+                            }
                         }
                     }
                   
@@ -226,11 +290,20 @@ $imgBack : #b9e7e7;
     .single{
         display: flex;
         gap: 50px;
+        @media (max-width: 800px) {
+            flex-direction: column;
+           
+        }
         .content{
             flex:5;
             display: flex;
             flex-direction: column;
             gap: 30px;
+            @media (max-width: 800px) {
+                padding: 20px;
+                box-sizing:border-box;
+                gap: 10px;
+            }
             img{
                 width: 100%;
                 height: 300px;
@@ -275,7 +348,11 @@ $imgBack : #b9e7e7;
         }
         .menu{
             flex: 2;
+            h1{
+                text-align: center;
+            }
             .post{
+               
                 margin-bottom: 20px;
                 display: flex;
                 flex-direction: column;
@@ -288,6 +365,9 @@ $imgBack : #b9e7e7;
                 h2{
                     color: #333;
                     margin: 0;
+                    @media (max-width: 800px) {
+                        text-align: center;
+                    }
                 }
                 button{
                     width: max-content;
@@ -300,6 +380,9 @@ $imgBack : #b9e7e7;
                     background-color: white;
                     color: teal;
                     font-weight: 300;
+                    @media (max-width: 800px) {
+                        margin: 0 auto;
+                    }
                     &:hover{
                         border: 1px solid white;
                         background-color: $lightGrenn;
@@ -314,6 +397,12 @@ $imgBack : #b9e7e7;
         margin-top: 20px;
         display: flex;
         gap: 20px;
+        @media (max-width: 800px) {
+            flex-direction: column;
+            padding: 20px;
+            box-sizing:border-box;
+            gap: 70px;
+        }
         .content{
             flex:5;
             display: flex;
@@ -325,6 +414,9 @@ $imgBack : #b9e7e7;
             }
             .editorContainer{
                 height: 500px;
+                @media (max-width: 800px) {
+                    height: 400px;
+                }
             }
         }
         .menu{
@@ -342,6 +434,9 @@ $imgBack : #b9e7e7;
                 justify-content: space-between;
                 font-size: 12px;
                 color: #555;
+                @media (max-width: 800px) {
+                    gap: 15px;
+                }
                 h1{
                     font-size: 20px;
                     margin: 0px;
@@ -392,5 +487,20 @@ $imgBack : #b9e7e7;
 }
 .content{
     width: 1024px;
+    @media (max-width: 800px) {
+        width: 100%;
+    }
 }
-
+.Write{
+    height: 40px;
+    width: 70px;
+    background-color: $lightGrenn;
+    border-radius: 10%;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 300;
+    &:hover{
+        background-color: teal;
+        color: white;
+    }
+}
