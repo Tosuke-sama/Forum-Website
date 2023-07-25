@@ -8,6 +8,7 @@ import {AuthContext} from '../context/authContext'
 import axios from 'axios'
 import 'moment/dist/locale/zh-cn'
 import ReactHtmlParser from 'react-html-parser';
+import Comment from '../components/Comment'
 moment.locale('zh-cn')
 function Single() {
   const [post,setPost] = useState({});
@@ -38,6 +39,7 @@ function Single() {
     }
   }
   return (
+    <div>
     <div className='single content'>
       <div className="content">
        {post.img && <img src={`../upload/${post?.img}`} alt="" />}
@@ -58,9 +60,11 @@ function Single() {
         <div>
         {ReactHtmlParser(post.content)}
         </div>
-      
+        <Comment/>
       </div>
       <div className="menu"><Menu cat={post.cat}></Menu></div>
+    </div>
+   
     </div>
   )
 }
