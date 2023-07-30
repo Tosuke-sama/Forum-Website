@@ -60,7 +60,7 @@ function Single() {
         <div>
         {ReactHtmlParser(post.content)}
         </div>
-        <Comment/>
+        <Comment postId={postId} />
       </div>
       <div className="menu"><Menu cat={post.cat}></Menu></div>
     </div>

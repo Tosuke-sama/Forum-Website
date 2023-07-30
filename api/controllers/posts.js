@@ -80,3 +80,31 @@ export const updatePost = (req, res) => {
        
     })
 }
+
+export const addComment = (req, res) => {
+    const token = req.cookies.access_token;
+    if(!token) return res.status(401).json({message:"请先登录"})
+    jwt.verify(token,"Tosuke",(err,decoded)=>{
+        if(err) return res.status(401).json({message:"请先登录"})
+        const q = "INSERT INTO comment(`uid`,`c_date`,`content`,`like`,`pid`) VALUES (?)";
+        const values = [
+            decoded.id,
+            req.body.date,
+            req.body.content,
+            0,
+            req.body.pid
+        ];
+        db.query(q,[values],(err,result)=>{
+            if(err) return res.status(500).json(err)
+            res.status(200).json({message:"添加评论成功"})
+        })
+       
+    })
+}
+export const getComment = (req, res) => {
+    const q = "SELECT c.cid,`c_date`,`content`,u.img AS userImg,u.username FROM users u JOIN comment c ON u.id=c.uid WHERE c.pid = ?";
+    db.query(q,req.params.id,(err,result)=>{
+        if(err) return res.status(500).json(err)
+        res.status(200).json(result);
+    })
+}
