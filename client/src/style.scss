@@ -496,22 +496,24 @@ $imgBack : #b9e7e7;
     }
     .allCommten{
         display: flex;
-        gap: 10px;
         flex-direction: column;
         border-radius: 5px;
-       
         .commten{
+           
             min-height: 100px;
             display: flex;
-            padding: 10px;
-            border-radius: 5px;
+            padding:15px 20px;
             flex-direction: column;
-            justify-content: space-evenly;
-            border-bottom: 1px solid lightgrey;
-            border-top: 1px solid lightgrey;
-            background-color: rgba(249, 248, 248, 0.834);
+            box-sizing:border-box;
+            justify-content: space-between;
+            border-bottom: 1px solid rgb(192, 192, 192);
+            background-color: rgb(255, 255, 255);
             .commenter{
                 display: flex;
+                align-items: center;
+              
+                justify-content: space-between;
+                padding-right: 20px;
                 .info{
                     display: flex;
                     flex-direction: row;

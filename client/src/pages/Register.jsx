@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {TextField,Alert } from '@mui/material';
-
-axios.defaults.baseURL='http://localhost:3000/api';
+import { motion } from "framer-motion";
+axios.defaults.baseURL='http://47.109.110.1:3000/api';
 axios.defaults.withCredentials=true
 const register = () => {
   const [input,setInput]= useState({
@@ -53,6 +53,16 @@ const register = () => {
   }
   return (
     <div className='auth'>
+         <motion.div
+      className="auth"
+      initial={{ opacity: 0, scale: 0.5 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        duration: 0.5,
+        delay: 0.2,
+        ease: [0, 0.71, 0.2, 1.01]
+      }}
+    >
       <h1>注册</h1>
       <form action="">
         <div>
@@ -72,6 +82,7 @@ const register = () => {
         <span> 已拥有账户？<Link to={"/login"}>点击登录</Link></span>
       </form>
      <div> {err && <Alert severity="error">{err}</Alert>}</div>
+     </motion.div>
     </div>
   )
 }

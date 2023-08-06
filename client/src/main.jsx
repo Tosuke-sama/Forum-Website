@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Register from './pages/Register.jsx';
@@ -9,7 +9,6 @@ import Single from './pages/Single.jsx';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-
 import './style.scss'
 import {
   createBrowserRouter,
@@ -17,12 +16,17 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { AuthContextProvider } from './context/authContext.js';
+
 const Latout = () => {
+  const [show,setShow] = useState(false);
+  setTimeout(() => {
+  setShow(true)
+  }, 1000);
   return (
     <div>
       <Navbar/>
       <Outlet/>
-      <Footer/>
+      {show && <Footer />}
     </div>
   )
 }

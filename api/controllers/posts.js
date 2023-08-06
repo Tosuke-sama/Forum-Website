@@ -102,7 +102,7 @@ export const addComment = (req, res) => {
     })
 }
 export const getComment = (req, res) => {
-    const q = "SELECT c.cid,`c_date`,`content`,u.img AS userImg,u.username FROM users u JOIN comment c ON u.id=c.uid WHERE c.pid = ?";
+    const q = "SELECT c.cid,`c_date`,`content`,`like`,u.img AS userImg,u.username FROM users u JOIN comment c ON u.id=c.uid WHERE c.pid = ?";
     db.query(q,req.params.id,(err,result)=>{
         if(err) return res.status(500).json(err)
         res.status(200).json(result);

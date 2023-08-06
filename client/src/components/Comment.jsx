@@ -1,30 +1,15 @@
 import React,{useState,useEffect} from 'react'
 import {TextField,Alert,Button } from '@mui/material';
 import moment from 'moment';
-import axios from 'axios'
-const list1 = [{
-    name: 'Tosuke',
-    time: '2021-10-10',
-    content: '我爱上帝噶客户是否可见哈桑法律框架哈桑啊沙发上激发了是阿斯弗啊沙发沙发阿斯弗阿斯弗阿斯弗阿斯弗啊啊是',
-    like: 10
-},
-{
-    name: 'Tosuke',
-    time: '2021-10-10',
-    content: '我爱上帝噶客户是否可见哈桑法律框架哈桑啊沙发上激发了是阿斯弗啊沙发沙发阿斯弗阿斯弗阿斯弗阿斯弗啊啊是',
-    like: 10
-},
-{
-    name: 'Tosuke',
-    time: '2021-10-10',
-    content: '我爱上帝噶客户是否可见哈桑法律框架哈桑啊沙发上激发了是阿斯弗啊沙发沙发阿斯弗阿斯弗阿斯弗阿斯弗啊啊是',
-    like: 10
-}
-]
+import axios from 'axios';
+import { Snackbar} from '@mui/material';
+import { motion } from "framer-motion";
 const Comment = (postId) => {
     const [content,setContent] = useState('')
+    const [ifo,setIfo] = useState({message:'',type:''})
     const [isComment,setIsComment] = useState(false)
     const [list,setList] = useState([])
+    const [open,setOpen] = useState(false)
     useEffect(()=>{
         const fetchData = async () => {
           try{
@@ -38,13 +23,23 @@ const Comment = (postId) => {
         fetchData();
         
       },[postId,isComment])
-    const handleCilck = async () =>{
-        if(content === '') return
+    const handleCilck = async (e) =>{
+        e.preventDefault()
+        if(content === '') {
+            setIfo({message:"评论不能为空！",type:"error"})
+            setOpen(true)
+            return
+        }
         try{
             const res = await axios.post("/posts/comment",{content,date:moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),pid:postId.postId});
+            setIfo({message:"评论发表成功！",type:"success"})
+            setContent('')
             setIsComment(!isComment)
+            setOpen(true)
+           
         }catch(err){
-            console.log(err)
+            setIfo({message:"请先登录！",type:"error"})
+            setOpen(true)
         }
     }
     const handleChange = (e) =>{
@@ -53,29 +48,49 @@ const Comment = (postId) => {
     return (
         <div>
             <div className='c_write'>
-            <TextField className='textfield' id="standard-basic" label="评论" variant="outlined" onChange={handleChange} />
+            <TextField className='textfield' id="standard-basic" value={content} label="评论" variant="outlined" onChange={handleChange} />
             <Button className='button' variant="contained" onClick={handleCilck}>发表</Button>
             </div>
         <div className='allCommten'>
             {list.map((item) => (
+                <motion.div
+                className=""
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.2,
+                  ease: [0, 0.71, 0.2, 1.01]
+                }}
+              >
                 <div className='commten'key={item.cid} >
                     <div className='commenter'>
                         <div className='info'>
                             <img className='' src={"../avater/"+item.userImg} alt="" />
                             <div className='name'> {item.username}</div>
-                            <div className='time'> {item.c_date}</div>
+                            <div className='time'> {moment(item.c_date).fromNow()}</div>
                         </div>
                         <div className='like'>
-                            {item.like}
+                            {"点赞  "+item.like}
                         </div>
                     </div>
                     <div className='c_content'>
                     {item.content}
                     </div>
                 </div>
-
+                </motion.div>
             ))}
         </div>
+        <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={open}
+        autoHideDuration={3300}
+        onClose={() => { setOpen(false) }}
+      >
+        <Alert severity={ifo.type} sx={{ width: '100%' }}>
+            {ifo.message}
+          </Alert>
+      </Snackbar>
         </div>
     )
 }

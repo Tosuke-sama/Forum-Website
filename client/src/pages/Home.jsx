@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import { AuthContext } from '../context/authContext'
 import { Snackbar,Alert } from '@mui/material';
+import { motion } from "framer-motion";
 const Home = () => {
   const { open, currentUser, setOpen } = useContext(AuthContext)
   const [posts, setPosts] = useState([]);
@@ -28,7 +29,18 @@ const Home = () => {
     <div className='home content'>
       <div className="posts">
         {posts.map((post) => (
-          <div className="post" key={post.id}>
+            <motion.div
+            className="post"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.5,
+              delay: 0.2,
+              ease: [0, 0.71, 0.2, 1.01]
+            }}
+            key={post.id}
+          >
+          {/* <div className="post" key={post.id}> */}
             <div className="img" >
               <Link to={`/post/${post.id}`}>
               <img src={`../upload/${post.img}`} alt="" />
@@ -43,7 +55,8 @@ const Home = () => {
                 <button > 阅读更多</button>
               </Link>
             </div>
-          </div>
+          {/* </div> */}
+          </motion.div>
         ))}
       </div>
       <Snackbar
