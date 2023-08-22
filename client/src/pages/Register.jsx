@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {TextField,Alert } from '@mui/material';
 import { motion } from "framer-motion";
-axios.defaults.baseURL='http://47.109.110.1:3000/api';
+axios.defaults.baseURL='http://localhost:3000/api';
 axios.defaults.withCredentials=true
 const register = () => {
   const [input,setInput]= useState({
@@ -32,7 +32,9 @@ const register = () => {
       console.log(err)
     }
   }
-
+  const login = () => {
+    navigate('/login');
+  }
   const handleChange = (e) => {
     setInput(prev=>({...prev,[e.target.name]:e.target.value}))
   }
@@ -78,8 +80,11 @@ const register = () => {
         <div className='input-text'>头像</div>
         <input required type='file'  onChange={e=>setImg(e.target.files[0])} /> 
         </div>
+        <div className='buttons'>
         <button onClick={register}>注册</button>
-        <span> 已拥有账户？<Link to={"/login"}>点击登录</Link></span>
+        <button onClick={login}>转到登录</button>
+        </div>
+        {/* <span> 已拥有账户？<Link to={"/login"}>点击登录</Link></span> */}
       </form>
      <div> {err && <Alert severity="error">{err}</Alert>}</div>
      </motion.div>

@@ -19,6 +19,10 @@ const Login = () => {
   const handleChange = (e) => {
     setInput(prev=>({...prev,[e.target.name]:e.target.value}))
   }
+  const handleRegister = (e) => {
+    e.preventDefault()
+    navigate('/register');
+  }
   const handlelogin = async (e) => { 
     e.preventDefault()
 
@@ -51,8 +55,11 @@ const Login = () => {
     <div>
     <TextField id="standard-basic" label="密码" variant="standard" onChange={handleChange} name='password'  type="password"/>
     </div>
+    <div className='buttons'>
     <button onClick={handlelogin}>登录</button>
-    <span> 还没有账户？<Link to={"/register"}>点击注册 </Link></span>
+    <button onClick={handleRegister}> 点击注册</button>
+    </div>
+    {/* <span> 还没有账户？<Link to={"/register"}>点击注册 </Link></span> */}
   </form> </motion.div>
       <div> {err && <Alert severity="error">{err}</Alert>}</div>
       

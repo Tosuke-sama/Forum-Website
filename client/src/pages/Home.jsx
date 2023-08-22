@@ -10,6 +10,7 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const location = useLocation();
   const cat = location.search;
+  console.log(cat)
   useEffect(() => {
     const fetchData = async () => {
       try {
