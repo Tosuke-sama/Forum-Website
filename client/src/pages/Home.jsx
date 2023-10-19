@@ -12,6 +12,7 @@ const Home = () => {
   const cat = location.search;
   console.log(cat)
   useEffect(() => {
+    console.log(currentUser)
     const fetchData = async () => {
       try {
         const res = await axios.get(`/posts${cat}`)

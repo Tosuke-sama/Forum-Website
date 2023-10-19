@@ -10,7 +10,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const cat = ["normal", "study", "time", "world", "adventure"];
   const [isHover,setIsHover] = useState(false)
-
+  
   const states = {
     show:{
       x:-30, // 向右移动100px
@@ -164,7 +164,7 @@ const Navbar = () => {
           variants={states}
           initial={'hidden'}
           animate={isHover?'nameShow':'hidden'}
-          className='link'> <div style={{zIndex:1,position:"relative"}} >{currentUser?.username}</div>   <motion.div 
+          className='link'> <div style={{zIndex:1,position:"relative"}} >   <Link className='link' to={`/Personal/${currentUser.id}`}> {currentUser?.username} </Link></div>   <motion.div 
           variants={states}
           onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -173,7 +173,7 @@ const Navbar = () => {
             animate={isHover?'menuShow':'menuHidden'}
           className='avaterMenu'>
           <div className='avaterMenubox'>You Get me!</div>
-             </motion.div> </motion.span>
+             </motion.div> </motion.span><Link className='link' to={`/Personal/${currentUser.id}`}>
           {currentUser && currentUser.img != "" ? <motion.img 
             id='avater'
             onMouseEnter={handleMouseEnter}
@@ -181,7 +181,7 @@ const Navbar = () => {
             variants={states}
             initial={'hidden'}
             animate={isHover?'show':'hidden'}
-            src={"../avater/" + currentUser.img} alt="" /> : <motion.img src="../avater/default.jpg" alt="" />}
+            src={"../avater/" + currentUser.img} alt="" /> : <motion.img src="../avater/default.jpg" alt="" />}</Link>
            
           {currentUser ? <span className='link' onClick={logout}> 注销</span> : <Link className='link' to="/login">登录</Link>}
           <span className='Write'> <Link className='link' to='/write'>写文章</Link>  </span>
