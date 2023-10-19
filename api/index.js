@@ -6,11 +6,17 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import multer from 'multer';
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://example.com', // 添加更多的允许的跨域源
+  'http://anotherdomain.com'
+];
+
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:true,
     credentials: true
 }))
 app.use("/api/auth",authrouter);
