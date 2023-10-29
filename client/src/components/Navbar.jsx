@@ -1,4 +1,4 @@
-import React, { useContext,useState } from 'react'
+import React, { useContext,useState,useEffect } from 'react'
 import Logo from '../img/logo.jpg'
 import { Link ,useNavigate} from 'react-router-dom'
 import { AuthContext } from '../context/authContext'
@@ -10,11 +10,24 @@ const Navbar = () => {
   const navigate = useNavigate();
   const cat = ["normal", "study", "time", "world", "adventure"];
   const [isHover,setIsHover] = useState(false)
-  
+  const [hoverWidth,setHoverWidth] = useState({
+    id:0,
+    avaterbox:0
+  })
+  useEffect(()=>{
+    const id = document.getElementById("idName").offsetWidth
+    const avaterbox = document.getElementById("avaterbox").offsetWidth
+    setHoverWidth({
+      id,
+      avaterbox
+    })
+  },isHover)
+  // const ID = document.getElementById("idName")
+
   const states = {
     show:{
-      x:-30, // 向右移动100px
-      y:20, // 向下移动200px
+      x:-((hoverWidth.id+40)/2-30)-15, // 向右移动100px
+      y:20, // 向下移动20px
       scale:2, // 缩放至0.5倍 // 旋转45度
       opacity:1 // 不透明度设置为0.5
     },
@@ -25,15 +38,15 @@ const Navbar = () => {
       opacity:1 // 不透明度设置为0.5
     },
     nameShow:{
-      x:22, // 向右移动100px
-      y:70, // 向下移动200px
-      scale:1.2, // 缩放至0.5倍 // 旋转45度
+      x:((1.2*hoverWidth.id+40)/2)-(1.2*hoverWidth.id/2), // 向右移动100px
+      y:70, // 向下移动70px
+      scale:1.2, // 缩放至1.2倍 // 旋转45度
       opacity:1 // 不透明度设置为0.5
       
     },
     menuShow:{
-      x:-70, // 向右移动100px
-      y:-50, // 向下移动200px
+      x:-((hoverWidth.avaterbox/2)-(hoverWidth.id/2)), // 向右移动100px
+      y:-51, // 向下移动200px
       scale:1,
       opacity:1,
     },
@@ -50,7 +63,6 @@ const Navbar = () => {
     
     clearTimeout(timer);
     setIsHover(true);
-   
   }
   const handleMouseLeave =()=>{
       clearTimeout(timer);
@@ -95,6 +107,13 @@ const Navbar = () => {
       setOpen(false)
     }
   }
+  const handleLoginout = ()=>{
+    setIsHover(false)
+    setTimeout(() => {
+      logout()
+    }, 500);
+    
+  }
   const list =()=>{
     return(
       <div style={{width:"150px",marginTop:"20%"}}>
@@ -121,7 +140,7 @@ const Navbar = () => {
         <div className='mobileAvater'>
           {currentUser && currentUser.img != "" ? <img src={"../avater/" + currentUser.img} alt="" /> : <img src="../avater/default.jpg" alt="" />}
           <span className='link' > {currentUser?.username}</span>
-          {currentUser ? <span className='link' onClick={logout}> 注销</span> : <Link className='link' to="/login">登录</Link>}
+          {currentUser ? <span className='link' onClick={handleLoginout}> 注销</span> : <Link className='link' to="/login">登录</Link>}
           <span className='Write'> <Link className='link' to='/write'>写文章</Link>  </span>
         </div>
         <div className='mobileNav'>
@@ -164,7 +183,8 @@ const Navbar = () => {
           variants={states}
           initial={'hidden'}
           animate={isHover?'nameShow':'hidden'}
-          className='link'> <div style={{zIndex:1,position:"relative"}} >   <Link className='link' to={`/Personal/${currentUser.id}`}> {currentUser?.username} </Link></div>   <motion.div 
+          className='link'> <div style={{zIndex:1,position:"relative"}} >   <Link id='idName' className='link' to={`/Personal/${currentUser?.id}`}> {currentUser?.username} </Link></div>   
+          <motion.div 
           variants={states}
           onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -172,8 +192,8 @@ const Navbar = () => {
             initial={'menuHidden'}
             animate={isHover?'menuShow':'menuHidden'}
           className='avaterMenu'>
-          <div className='avaterMenubox'>You Get me!</div>
-             </motion.div> </motion.span><Link className='link' to={`/Personal/${currentUser.id}`}>
+          <div id='avaterbox' className='avaterMenubox'>You Get me!</div>
+             </motion.div> </motion.span><Link className='link' to={`/Personal/${currentUser?.id}`}>
           {currentUser && currentUser.img != "" ? <motion.img 
             id='avater'
             onMouseEnter={handleMouseEnter}
@@ -183,7 +203,7 @@ const Navbar = () => {
             animate={isHover?'show':'hidden'}
             src={"../avater/" + currentUser.img} alt="" /> : <motion.img src="../avater/default.jpg" alt="" />}</Link>
            
-          {currentUser ? <span className='link' onClick={logout}> 注销</span> : <Link className='link' to="/login">登录</Link>}
+          {currentUser ? <span className='link' onClick={handleLoginout}> 注销</span> : <Link className='link' to="/login">登录</Link>}
           <span className='Write'> <Link className='link' to='/write'>写文章</Link>  </span>
         </div>
       </div>

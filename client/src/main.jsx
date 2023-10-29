@@ -17,7 +17,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { AuthContextProvider } from './context/authContext.js';
-
+import Popup from './components/Popup.jsx';
+let isPopup = sessionStorage.getItem("popUp")||"true"
+const handlePopup = ()=>{
+  sessionStorage.setItem("popUp",false)
+  isPopup = "false"
+}
 const Latout = () => {
   const [show,setShow] = useState(false);
   setTimeout(() => {
@@ -57,6 +62,7 @@ const router = createBrowserRouter([
 
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
+
   <React.StrictMode>
       <AuthContextProvider>
     <div className='app'>
@@ -64,6 +70,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <RouterProvider router={router} />
       </div>
     </div>
+    <Popup click={handlePopup} isShow={isPopup}></Popup>
     </AuthContextProvider>
   </React.StrictMode>,
 )

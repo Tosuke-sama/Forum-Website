@@ -24,8 +24,8 @@ const Personal = () => {
   }, [userId])
   return (
     <div className='personal'>
-       <img src={"../avater/" + currentUser.img} alt="" />
-       <div className='personalName'>{currentUser.username}</div>
+      {currentUser? <img src={"../avater/" + currentUser?.img} alt="" />:<img src={"../avater/default.jpg"} alt="" />}
+      {currentUser? <div className='personalName'>{currentUser?.username}</div>:<div className='personalName'>{"登录一下吧"}</div>}
        <div  className='personalLog'>{`通过JavaScript实现锚点功能可以让页面更加灵活，为用户提供更好的浏览体验。有了上面的代码，你就可以轻松地在你的网站上添加锚点功能了。当然，如果想要更进一步的优化页面效果，你还可以尝试其他的技巧，比如使用缓动函数等。`}</div>
        <div  className='posts'> {posts.map((post) => (
             <motion.div
