@@ -1,6 +1,11 @@
 $lightGrenn : #b9e7e7;
 $imgBack : #b9e7e7;
 .popupbox{
+    @media (max-width: 800px) {
+        width: 90%; 
+        box-sizing: border-box;
+        padding: 20px;
+    }
     position: fixed;
     width: 700px;
     height: 500px;
@@ -24,7 +29,17 @@ $imgBack : #b9e7e7;
         font-weight: bold;
         color: #69d8d8;
     }
+    .text{
+        text-align: center;
+    }
     img{
+        @media (max-width: 800px) {
+            user-select: none;
+            width: 90%;
+            height: 30%;
+            border-radius: 10px;
+            object-fit: cover;
+        }
         user-select: none;
         width: 550px;
         height: 250px;

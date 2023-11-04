@@ -1,20 +1,62 @@
-import React,{useContext,useState,useEffect} from 'react'
+import React,{useContext,useState,useEffect,useRef} from 'react'
 import { AuthContext } from '../context/authContext'
 import axios from "axios"
 import { motion } from "framer-motion";
 import ReactHtmlParser from 'react-html-parser';
 import { Link, useLocation } from 'react-router-dom'
+import lec3d from "@trickle/lec3d";
+
 const Personal = () => {
   const { currentUser, logout } = useContext(AuthContext)
   const [posts, setPosts] = useState([]);
 //   const [userId,setUserId] = useState();
+  const mountElmt = useRef()
   const userId = location.pathname.split('/')[2];
+  useEffect(()=>{
+    const { scene, renderer, camera, mountTo, refresh, addControls } = lec3d.init({
+    });
+    console.log(camera.position)
+    camera.position.x = 0
+    camera.position.y = 50
+    camera.position.z = 250
+    // addControls({
+    //   callback:(scene,camera)=>{
+    //     console.log(camera.position)
+    //   }
+    // })
+    lec3d.loadFBX({
+      modelPath: "../model/mythra.fbx",
+      options: {
+        scale: 0.01,
+        position: {
+          x: 0,
+          y: 0
+        }, 
+        animation:{
+          index:1
+        }
+      },
+      callback: (FBX,animationStart) => {
+        // camera.lookAt(model.position)
+        animationStart()
+        scene.add(FBX);
+        camera.lookAt(...FBX.position)
+      },
+    });
+    mountTo(mountElmt.current)
+    return ()=>{
+      scene.clear()
+    }
+  },[])
+
   useEffect(() => {
-    console.log(userId)
+    // console.log(userId)
+    //获得用户文章
+    //TODO：用户文章查询
     const fetchData = async () => {
       try {
         const res = await axios.get(`/posts?cat=adventure`)
-        console.log(res.data)
+        // console.log(res.data)
         setPosts(res.data)
       } catch (err) {
         console.log(err)
@@ -57,6 +99,7 @@ const Personal = () => {
           {/* </div> */}
           </motion.div>
         ))} </div>
+        <div ref={mountElmt} className='lec3d'></div>
     </div>
   )
 }

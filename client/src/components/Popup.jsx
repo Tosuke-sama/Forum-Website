@@ -25,7 +25,7 @@ const Popup = (props) => {
         >
             <div className='title'>好久不见</div>
             <div>~欢迎来到京介的怪谈小屋~</div>
-            <div>此为京介个人记录的站点，京介也赞成大家写下自己的观点或者建议</div>
+            <div className='text'>此为京介个人记录的站点，京介也赞成大家写下自己的观点或者建议</div>
             <div>祝你过得开心！</div>
             <img src={popup} alt="" />
             <div className='btn' onClick={handleClickMed}>好的</div>

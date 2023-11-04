@@ -63,7 +63,7 @@ const router = createBrowserRouter([
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
 
-  <React.StrictMode>
+  // <React.StrictMode>
       <AuthContextProvider>
     <div className='app'>
       <div className='container'>
@@ -72,5 +72,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </div>
     <Popup click={handlePopup} isShow={isPopup}></Popup>
     </AuthContextProvider>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

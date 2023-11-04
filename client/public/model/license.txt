@@ -1,0 +1,11 @@
+Model Information:
+* title:	Xenoblade Chronicles 2 - Mythra
+* source:	https://sketchfab.com/3d-models/xenoblade-chronicles-2-mythra-79422b94495e401580c877e1946f1cd8
+* author:	theuniversalmodeler (https://sketchfab.com/theuniversalmodeler)
+
+Model License:
+* license type:	CC-BY-ND-4.0 (http://creativecommons.org/licenses/by-nd/4.0/)
+* requirements:	Author must be credited. Modified versions can not be distributed. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Xenoblade Chronicles 2 - Mythra" (https://sketchfab.com/3d-models/xenoblade-chronicles-2-mythra-79422b94495e401580c877e1946f1cd8) by theuniversalmodeler (https://sketchfab.com/theuniversalmodeler) licensed under CC-BY-ND-4.0 (http://creativecommons.org/licenses/by-nd/4.0/)

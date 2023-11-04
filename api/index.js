@@ -4,12 +4,15 @@ import authrouter from "./routes/auth.js";
 import userrouter from "./routes/users.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import https from 'https'
 import multer from 'multer';
+import fs from 'fs'
 
 const allowedOrigins = [
   'http://localhost:5173',
   'http://example.com', // 添加更多的允许的跨域源
-  'http://anotherdomain.com'
+  'http://anotherdomain.com',
+  'https://tosuke.top'
 ];
 
 const app = express();
@@ -23,6 +26,11 @@ app.use("/api/auth",authrouter);
 app.use("/api/user",userrouter);
 app.use("/api/posts",postrouter);
 
+var options = {
+  key:fs.readFileSync('./keys/privkey.key'),
+  cert:fs.readFileSync('./keys/fullchain.pem')
+}
+var httpsServer = https.createServer(options,app);
 
 const storageImg = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -61,7 +69,9 @@ app.post('/api/upload/avater', uploadAvater.single('file'), (req, res) => {
 app.get("/",(req,res)=>{
     res.send("Hello World");
 })
-
+// httpsServer.listen(3000,(req,res)=>{
+//   console.log("Server is running at port 3000");
+// })
 app.listen(3000,(req,res)=>{
     console.log("Server is running at port 3000");
 })
