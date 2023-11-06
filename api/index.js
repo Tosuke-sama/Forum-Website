@@ -26,11 +26,11 @@ app.use("/api/auth",authrouter);
 app.use("/api/user",userrouter);
 app.use("/api/posts",postrouter);
 
-var options = {
-  key:fs.readFileSync('./keys/privkey.key'),
-  cert:fs.readFileSync('./keys/fullchain.pem')
-}
-var httpsServer = https.createServer(options,app);
+// var options = {
+//   key:fs.readFileSync('./keys/privkey.key'),
+//   cert:fs.readFileSync('./keys/fullchain.pem')
+// }
+// var httpsServer = https.createServer(options,app);
 
 const storageImg = multer.diskStorage({
     destination: function (req, file, cb) {

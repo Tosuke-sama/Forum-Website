@@ -195,8 +195,12 @@ $imgBack : #b9e7e7;
 
     //footer
     footer{
+        display: flex;
+        flex-direction: column;
         margin-top: 100px;
+        .footer{
         padding: 20px;
+        margin-top: 5px;
         background-color: $lightGrenn;
         display: flex;
         align-items: center;
@@ -207,6 +211,27 @@ $imgBack : #b9e7e7;
         }
         span{
             font-weight: 300;
+        }
+        }
+        .mask{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            a{
+                text-decoration: none;
+                color: #8f8f8f;
+            }
+            .icon{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img{
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 5px;
+                }
+                
+            }
         }
     }
     //Home
@@ -707,7 +732,52 @@ $imgBack : #b9e7e7;
         }
     }
 
-
+    .friendly{
+        margin-top: 50px;
+        width: 1024px;
+        height: 680px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        .item{
+            height: 280px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            border: 2px solid #ccc;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);  
+            .photo{
+                width: 350px;
+                height: 200px;
+                .img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 10px 10px 0px 0px;
+                    pointer-events:none
+                }
+                .iframe{
+                    display: none;
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                    border-radius: 10px 10px 0px 0px;
+                    pointer-events:none
+                }
+            }
+            .title{
+                font-size: 20px;
+                font-weight: 600;
+            }
+            .text{
+                font-weight: 300;
+            }
+        }
+    }
 
 
 }   

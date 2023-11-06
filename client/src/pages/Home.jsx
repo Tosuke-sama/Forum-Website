@@ -3,20 +3,26 @@ import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import { AuthContext } from '../context/authContext'
-import { Snackbar,Alert } from '@mui/material';
+import { Snackbar, Alert, Skeleton } from '@mui/material';
 import { motion } from "framer-motion";
 const Home = () => {
   const { open, currentUser, setOpen } = useContext(AuthContext)
   const [posts, setPosts] = useState([]);
+  const [isLoad, setIsLoad] = useState(false);
   const location = useLocation();
   const cat = location.search;
   console.log(cat)
   useEffect(() => {
+    setIsLoad(false)
     console.log(currentUser)
     const fetchData = async () => {
       try {
         const res = await axios.get(`/posts${cat}`)
         setPosts(res.data)
+        setTimeout(() => {
+          setIsLoad(true)
+        }, 1000);
+      
       } catch (err) {
         console.log(err)
       }
@@ -29,23 +35,22 @@ const Home = () => {
 
   return (
     <div className='home content'>
-      <div className="posts">
+      {isLoad ? <div className="posts">
         {posts.map((post) => (
-            <motion.div
+          <motion.div
             className="post"
-            initial={{ opacity: 0, scale: 0.5}}
+            initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
               duration: 0.5,
-              delay: 0.2,
               ease: [0, 0.71, 0.2, 1.01]
             }}
             key={post.id}
           >
-          {/* <div className="post" key={post.id}> */}
+            {/* <div className="post" key={post.id}> */}
             <div className="img" >
               <Link to={`/post/${post.id}`}>
-              <img src={`../upload/${post.img}`} alt="" />
+                <img src={`../upload/${post.img}`} alt="" />
               </Link>
             </div>
             <div className="content">
@@ -57,10 +62,19 @@ const Home = () => {
                 <button > 阅读更多</button>
               </Link>
             </div>
-          {/* </div> */}
+            {/* </div> */}
           </motion.div>
         ))}
-      </div>
+      </div> : <div className="posts">{[1,2,3,4].map((post) => (
+        <div className="post" >
+          <div className="img" >
+            <Skeleton variant="rectangular" width={410} height={300} />
+          </div>
+          <div className="content">
+            <Skeleton width="60%" height={60} />
+            <div>{[1, 2, 3, 4, 5].map(() => <Skeleton width="80%" height={30} />)}</div>
+          </div>
+        </div>))}</div>}
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={open}
@@ -68,8 +82,8 @@ const Home = () => {
         onClose={() => { setOpen(false) }}
       >
         <Alert severity="success" sx={{ width: '80%' }}>
-            欢迎回来，{currentUser?.username}，爱来自京介!
-          </Alert>
+          欢迎回来，{currentUser?.username}，爱来自京介!
+        </Alert>
       </Snackbar>
     </div>
 

@@ -18,6 +18,7 @@ import {
 } from "react-router-dom";
 import { AuthContextProvider } from './context/authContext.js';
 import Popup from './components/Popup.jsx';
+import Friendly from './pages/Friendly.jsx';
 let isPopup = sessionStorage.getItem("popUp")||"true"
 const handlePopup = ()=>{
   sessionStorage.setItem("popUp",false)
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
         path: "/Personal/:id",
         element: <Personal/>,
       },
+      {
+        path: "/world",
+        element: <Friendly/>,
+      },
   ],
   },
   {
@@ -58,6 +63,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login/>,
   },
+ 
  
 
 ]);

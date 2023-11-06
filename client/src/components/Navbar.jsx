@@ -162,7 +162,12 @@ const Navbar = () => {
           <BottomNavigation
             showLabels
             onChange={(event, newValue) => {
+              console.log(newValue)
+              if(newValue===3)
+              navigate(`/world`)
+             else
               navigate(`/?cat=${cat[newValue]}`)
+
             }} 
           >
             <BottomNavigationAction  className='link' label="日常" />
