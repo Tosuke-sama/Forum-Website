@@ -1,5 +1,11 @@
 $lightGrenn : #b9e7e7;
 $imgBack : #b9e7e7;
+:root {
+    --rotate-speed: 40;
+    --count: 6;
+    --easing: cubic-bezier(0.000, 0.37, 1.000, 0.63);
+}
+
 .app{
     user-select: none;
     -webkit-tap-highlight-color:rgba(0,0,0,0);
@@ -805,6 +811,204 @@ $imgBack : #b9e7e7;
             }
         }
     }
+    .timeContarin{
+        width: 1024px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    .timeBody{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+       
+        .timesBox{
+            width: 100%;
+            max-width: 1024px;
+            margin: auto;
+            position: relative;
+            aspect-ratio: 1 / 1;
+            
+            .times{
+                -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 50%,
+                rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 1));
+                .second-circle {
+                    position: absolute;
+                    width: 40%;
+                    aspect-ratio: 1 / 1;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    background: #F5F4FE;
+                    opacity: 0.5;
+                    box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3),
+                        0px 30px 60px -12px rgba(12, 5, 46, 0.25);
+                    border-radius: 50%;
+                    background-image: url(./03.gif);
+                }
+        
+                /* 设置最后一个圆样式 */
+                .last-circle {
+                    position: absolute;
+                    width: 66%;
+                    aspect-ratio: 1 / 1;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    background: #F5F4FE;
+                    opacity: 0.25;
+                    box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3), 0px 30px 60px -12px rgba(12, 5, 46, 0.25);
+                    border-radius: 50%;
+                    background-image: url(./03.gif);
+                }
+                ul:hover{
+                    li{
+                        animation-play-state: paused;
+                        .card{
+                            animation-play-state: paused;
+                        }
+                    }
+                    animation-play-state: paused;
+                
+                }
+                ul {
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    position: relative;
+                    width: 100%;
+                    aspect-ratio: 1 / 1;
+                    z-index: 1;
+                }
+                .card-list{
+                    /* 设置列表项样式 */
+                    li {
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        width: 100%;
+                        animation: rotateCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
+                    }
+                    li:nth-child(2),
+                    li:nth-child(2) .card {
+                        animation-delay: calc((var(--rotate-speed)/var(--count)) * -1s);
+                    }
+            
+                    li:nth-child(3),
+                    li:nth-child(3) .card {
+                        animation-delay: calc((var(--rotate-speed)/var(--count)) * -2s);
+                    }
+            
+                    li:nth-child(4),
+                    li:nth-child(4) .card {
+                        animation-delay: calc((var(--rotate-speed)/var(--count)) * -3s);
+                    }
+            
+                    li:nth-child(5),
+                    li:nth-child(5) .card {
+                        animation-delay: calc((var(--rotate-speed)/var(--count)) * -4s);
+                    }
+            
+                    li:nth-child(6),
+                    li:nth-child(6) .card {
+                        animation-delay: calc((var(--rotate-speed)/var(--count)) * -5s);
+                    }
+            
+                    .card {
+                        @keyframes rotateCW {
+                            from {
+                                transform: translate3d(0px, -50%, -1px) rotate(-45deg);
+                            }
+                
+                            to {
+                                transform: translate3d(0px, -50%, 0px) rotate(-315deg);
+                            }
+                        }
+                
+                        /* 定义逆时针旋转动画 */
+                        @keyframes rotateCCW {
+                            from {
+                                transform: rotate(45deg);
+                            }
+                
+                            to {
+                                transform: rotate(315deg);
+                            }
+                        }
+                        width: 27%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-start;
+                        padding: 16px 24px;
+                        gap: 8px;
+                        background: #FFFFFF;
+                        box-shadow: 0px 4px 12px rgba(70, 0, 255, 0.1), 0px 16px 32px rgba(165, 135, 255, 0.1);
+                        border-radius: 12px;
+                        font: 400 14px '';
+                        color: #535062;
+                        animation: rotateCCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
+                        img{
+                            width: 100%;
+                        }
+                        a {
+                            text-decoration: none;
+                            color: unset;
+                            display: block;
+                            height: 80px;
+                            overflow: hidden;
+                        }
+                    }
+                }
+                
+            }
+            .center-circle {
+                position: absolute;
+                width: 230px;
+                aspect-ratio: 1 / 1;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                background: #FFFFFF;
+                box-shadow: 0px 18px 36px -18px rgba(12, 5, 46, 0.3),
+                    0px 30px 60px -12px rgba(12, 5, 46, 0.25);
+                border-radius: 50%;
+                background-size: cover;
+                background-position: -35px 0;
+            }
+            .mask {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 50%;
+                background-position: 100% 50%;
+                background-repeat: no-repeat;
+                background-image: radial-gradient(100% 50% at 100% 50%, rgba(60, 26, 229, 0.25) 0%,
+                 rgba(59, 26, 229, 0.241896) 20%,
+                        rgba(53, 26, 229, 0.1872) 40%,
+                        rgba(41, 23, 240, 0.104) 60%,
+                        rgba(34, 26, 229, 0.0184296) 90%, rgba(32, 26, 229, 0) 100%);
+            }
+            .mask:after {
+                content: "";
+                position: absolute;
+                width: 1px;
+                height: 100%;
+                right: 0;
+                display: block;
+                background-image: linear-gradient(180deg, rgba(60, 26, 229, 0) 0%,#3C1AE5 50%,
+                 rgba(60, 26, 229, 0) 100%); 
+            }
+            
+        }
+    }
+}
 
 
 }   

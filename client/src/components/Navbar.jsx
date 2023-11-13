@@ -107,6 +107,8 @@ const Navbar = () => {
       console.log(index)
       if(index===3)
       navigate(`/world`)
+      else if(index===2)
+      navigate(`/time`)
       else
       navigate(`/?cat=${cat[index]}`)
       setOpen(false)
@@ -170,6 +172,8 @@ const Navbar = () => {
               console.log(newValue)
               if(newValue===3)
               navigate(`/world`)
+              else if(newValue===2)
+              navigate(`/time`)
              else
               navigate(`/?cat=${cat[newValue]}`)
 
