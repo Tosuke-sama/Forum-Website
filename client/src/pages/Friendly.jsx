@@ -9,6 +9,7 @@ const Friendly = () => {
     const el = []
     const datas = [{id:1,name:"Tosuke",img:"../upload/1.jpg",url:"https://tosuke.gitee.io/",text:"京介的正牌博客"},{id:2,img:"../upload/2.jpg",name:"skyme",url:"https://skym1.gitee.io/",text:"在这里记录着有关与我的一些东西"},{id:3,img:"../upload/3.jpg",name:"LEI",url:"https://thunderstorm2018.gitee.io/leiblog/",text:"雷樱者记录学习历程的网站"}];
     const lists = []
+    let iframe = useRef(null);
     useEffect(()=>{
         datas.forEach((item,index)=>{
             lists[index] = false
@@ -22,17 +23,21 @@ const Friendly = () => {
         setIsHover(lists)
     }
     const handleMouseLeave = (index)=>{
-        lists[index] = false
+        iframe.current.target.style.display = "none"
         el[index].style.display = "block"
+        lists[index] = false
         setIsHover(lists)
+      
     }
     const handleClick = (url)=>{
         window.open(url);
     }
+    //加载iframe切换样式
     const handleLoad = (e,index)=>{
+        iframe.current = e
         e.target.style.display = "block"
         el[index].style.display = "none"
-       console.log( el[0])
+    //    console.log( el[0])
       
     }
     return (
@@ -55,7 +60,7 @@ const Friendly = () => {
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={() => handleMouseLeave(index)} 
             onClick={()=>handleClick(item.url)}
-            > {isHover[index]&&<iframe onLoad={(e)=>handleLoad(e,index)} src={item.url} s className='iframe'></iframe>}
+            > {isHover[index]&&<iframe onLoad={(e)=>handleLoad(e,index)} src={item.url}  className='iframe'></iframe>}
             <img className='img' src={`${item.img}`} ref={(e)=>{el[index] = e}} alt="" /></div>
             <div className='title'>{item.name}</div>
             <div className='text'> {item.text}</div>

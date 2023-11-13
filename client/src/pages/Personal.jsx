@@ -19,11 +19,11 @@ const Personal = () => {
     camera.position.x = 0
     camera.position.y = 50
     camera.position.z = 250
-    // addControls({
-    //   callback:(scene,camera)=>{
-    //     console.log(camera.position)
-    //   }
-    // })
+    addControls({
+      callback:(scene,camera)=>{
+        console.log(camera.position)
+      }
+    })
     lec3d.loadFBX({
       modelPath: "../model/mythra.fbx",
       options: {
@@ -38,7 +38,7 @@ const Personal = () => {
       },
       callback: (FBX,animationStart) => {
         // camera.lookAt(model.position)
-        animationStart()
+        // animationStart()
         scene.add(FBX);
         camera.lookAt(...FBX.position)
       },

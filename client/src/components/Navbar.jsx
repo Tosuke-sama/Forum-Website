@@ -102,7 +102,12 @@ const Navbar = () => {
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = ()=>{setOpen(!open)};
   const navClick = (index)=>{
+    
     return ()=>{
+      console.log(index)
+      if(index===3)
+      navigate(`/world`)
+      else
       navigate(`/?cat=${cat[index]}`)
       setOpen(false)
     }
