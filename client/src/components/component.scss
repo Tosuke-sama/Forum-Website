@@ -7,12 +7,14 @@ $imgBack : #b9e7e7;
         padding: 20px;
     }
     position: fixed;
-    width: 700px;
-    height: 500px;
+    // width: 700px;
+    // height: 500px;
     gap: 15px;
     background-color: rgb(255, 255, 255);
     border: 2px solid #ccc;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);  
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    padding: 20px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -29,13 +31,23 @@ $imgBack : #b9e7e7;
         font-weight: bold;
         color: #69d8d8;
     }
+    .title2{
+        font-weight: 300;
+        font-size: 20px;
+    }
     .text{
         text-align: center;
+        width: 70%;
+    }
+    .end{
+        font-weight: 100 ;
+        font-style: italic; /* 斜体 */
+        opacity: 0.5;      /* 透明度，取值范围为 0（完全透明）到 1（完全不透明） */
     }
     img{
         @media (max-width: 800px) {
             user-select: none;
-            width: 90%;
+            width: 80%;
             height: 30%;
             border-radius: 10px;
             object-fit: cover;
@@ -44,6 +56,7 @@ $imgBack : #b9e7e7;
         width: 550px;
         height: 250px;
         object-fit: cover;
+        border-radius: 10px;
     }
 }
 .btn{

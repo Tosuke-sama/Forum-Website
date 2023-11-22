@@ -48,12 +48,23 @@ const storageImg = multer.diskStorage({
       cb(null, Date.now() + file.originalname )
     }
   })
+  const storageTime = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, '../client/public/time')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + file.originalname )
+    }
+  })
   
   const upload = multer({ 
     storage:storageImg
 })
   const uploadAvater = multer({ 
   storage:storageAvater
+})
+const uploadTime = multer({ 
+  storage:storageTime
 })
 
 app.post('/api/upload', upload.single('file'), (req, res) => {
@@ -65,6 +76,12 @@ app.post('/api/upload/avater', uploadAvater.single('file'), (req, res) => {
   const file = req.file
   res.status(200).json(file.filename)
 })
+//时间线上传
+app.post('/api/upload/time', uploadTime.single('file'), (req, res) => {
+  const file = req.file
+  res.status(200).json(file.filename)
+})
+
 
 app.get("/",(req,res)=>{
     res.send("Hello World");

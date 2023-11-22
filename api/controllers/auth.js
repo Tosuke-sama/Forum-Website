@@ -74,3 +74,25 @@ export const logout = (req, res) => {
         // secure:true,
     }).status(200).json({ message: "loginout successfully" });
 }
+
+export const time = (req, res) => {
+    const { time, thing, content,ending,url } = req.body;
+    const q1 = "INSERT INTO time(`time`,`thing`,`content`,`ending`,`url`) VALUES (?)";
+    db.query(q1,[[time, thing, content,ending,url]], (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.status(200).json({ message: "register successfully" });
+        }}
+    )
+    
+}
+export const times = (req, res) => {
+    const q = "SELECT * FROM time ORDER BY RAND(id) LIMIT 10";
+    db.query(q,req.query.cat,(err,result)=>{
+        if(err) return res.json(err)
+        res.status(200).json(result);
+    })
+   
+}

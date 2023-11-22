@@ -20,12 +20,16 @@ import { AuthContextProvider } from './context/authContext.js';
 import Popup from './components/Popup.jsx';
 import Friendly from './pages/Friendly.jsx';
 import Time from './pages/Time.jsx';
-let isPopup = sessionStorage.getItem("popUp")||"true"
-const handlePopup = ()=>{
-  sessionStorage.setItem("popUp",false)
-  isPopup = "false"
-}
+// let isPopup = sessionStorage.getItem("popUp")||"true"
+  // const [isPopup,setIsPopup] = useState(sessionStorage.getItem("popUp")||"true")
+ 
 const Latout = () => {
+  const [isPopup,setIsPopup] = useState(sessionStorage.getItem("popUp")||"true")
+  const handlePopup = ()=>{
+    sessionStorage.setItem("popUp",false)
+    setIsPopup(false)
+    // isPopup = "false"
+  }
   const [show,setShow] = useState(false);
   setTimeout(() => {
   setShow(true)
@@ -35,6 +39,12 @@ const Latout = () => {
       <Navbar/>
       <Outlet/>
       {show && <Footer />}
+      <Popup click={handlePopup} isShow={isPopup==="true"} content={{title:"好久不见",
+        title2:"~欢迎来到京介的怪谈小屋~",
+        explain:"此为京介个人记录的站点，京介也赞成大家写下自己的观点或者建议",
+        ending:"祝你过得开心！",
+        url:"popup.jpg"
+        }}></Popup>
     </div>
   )
 }
@@ -81,7 +91,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <RouterProvider router={router} />
       </div>
     </div>
-    <Popup click={handlePopup} isShow={isPopup}></Popup>
     </AuthContextProvider>
   // </React.StrictMode>,
 )

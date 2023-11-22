@@ -2,7 +2,7 @@ $lightGrenn : #b9e7e7;
 $imgBack : #b9e7e7;
 :root {
     --rotate-speed: 40;
-    --count: 6;
+    --count: 10;
     --easing: cubic-bezier(0.000, 0.37, 1.000, 0.63);
 }
 
@@ -814,10 +814,11 @@ $imgBack : #b9e7e7;
     .timeContarin{
         width: 1024px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
     .timeBody{
-        width: 90%;
+        width: 85%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -867,16 +868,17 @@ $imgBack : #b9e7e7;
                     border-radius: 50%;
                     background-image: url(./03.gif);
                 }
-                ul:hover{
-                    li{
+               
+                ul.pause-animation {
+                    li{                                
                         animation-play-state: paused;
                         .card{
                             animation-play-state: paused;
                         }
                     }
                     animation-play-state: paused;
-                
-                }
+                  }
+                  
                 ul {
                     list-style-type: none;
                     margin: 0;
@@ -892,8 +894,9 @@ $imgBack : #b9e7e7;
                         position: absolute;
                         top: 50%;
                         transform: translateY(-50%);
+                        background: transparent;
                         width: 100%;
-                        animation: rotateCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
+                        animation: rotateCW calc(var(--rotate-speed) * 1s)  infinite linear;
                     }
                     li:nth-child(2),
                     li:nth-child(2) .card {
@@ -919,26 +922,42 @@ $imgBack : #b9e7e7;
                     li:nth-child(6) .card {
                         animation-delay: calc((var(--rotate-speed)/var(--count)) * -5s);
                     }
+                    li:nth-child(7),
+                    li:nth-child(7) .card {
+                        animation-delay: calc((var(--rotate-speed)/var(--count)) * -6s);
+                    }
+                    li:nth-child(8),
+                    li:nth-child(8) .card {
+                        animation-delay: calc((var(--rotate-speed)/var(--count)) * -7s);
+                    }
+                    li:nth-child(9),
+                    li:nth-child(9) .card {
+                        animation-delay: calc((var(--rotate-speed)/var(--count)) * -8s);
+                    }
+                    li:nth-child(10),
+                    li:nth-child(10) .card {
+                        animation-delay: calc((var(--rotate-speed)/var(--count)) * -9s);
+                    }
             
                     .card {
                         @keyframes rotateCW {
                             from {
-                                transform: translate3d(0px, -50%, -1px) rotate(-45deg);
+                                transform: translate3d(0px, -50%, -1px) rotate(0deg);
                             }
                 
                             to {
-                                transform: translate3d(0px, -50%, 0px) rotate(-315deg);
+                                transform: translate3d(0px, -50%, 0px) rotate(-360deg);
                             }
                         }
                 
                         /* 定义逆时针旋转动画 */
                         @keyframes rotateCCW {
                             from {
-                                transform: rotate(45deg);
+                                transform: rotate(0deg);
                             }
                 
                             to {
-                                transform: rotate(315deg);
+                                transform: rotate(360deg);
                             }
                         }
                         width: 27%;
@@ -952,7 +971,7 @@ $imgBack : #b9e7e7;
                         border-radius: 12px;
                         font: 400 14px '';
                         color: #535062;
-                        animation: rotateCCW calc(var(--rotate-speed) * 1s) var(--easing) infinite;
+                        animation: rotateCCW calc(var(--rotate-speed) * 1s)  infinite linear;
                         img{
                             width: 100%;
                         }
@@ -962,6 +981,17 @@ $imgBack : #b9e7e7;
                             display: block;
                             height: 80px;
                             overflow: hidden;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            .timeTitle{
+                                text-align: center;
+                                font-size: 20px;
+                                font-weight: bold;
+                            }
+                            .timeContent{
+                                font-weight: 300;
+                            }
                         }
                     }
                 }
@@ -1007,6 +1037,98 @@ $imgBack : #b9e7e7;
             }
             
         }
+    }
+    .timeButon{
+        button{
+            width: 180px;
+            height: 40px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border: none;
+            padding: 5px;
+            outline: none;
+            cursor: pointer;
+            background-color: teal;
+            color: white;
+        }
+    }
+    .popup{
+        @media (max-width: 800px) {
+            width: 90%; 
+            box-sizing: border-box;
+            padding: 20px;
+        }
+        position: fixed;
+        width: 700px;
+        height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 99;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        form > div{
+            width: 250px;
+        }
+        form{
+            width: 300px;
+            height: 500px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content:space-evenly;
+            align-items: center;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+           
+            span{
+                font-size: 15px;
+                color: black;
+                text-align: center;
+            }
+            p{
+                font-size: 10px;
+                color: red;
+                text-align: center;
+            }
+        }
+        // input{
+        //     width: 250px;
+        //     height: 30px;
+        //     border-radius: 5px;
+        //     border: none;
+        //     border-bottom: 1px solid #ccc;
+        //     padding: 5px;
+        //     outline: none;
+        // }
+        .buttons{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            #canle{
+                background-color: rgba(131, 24, 24, 0.571);
+            }
+            button{
+            width: 40%;
+            height: 40px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border: none;
+            padding: 5px;
+            outline: none;
+            cursor: pointer;
+            background-color: rgb(0, 169, 152);
+            color: white;
+        }
+
+        }
+        
     }
 }
 
