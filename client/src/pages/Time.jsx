@@ -113,7 +113,8 @@ const Time = () => {
     setIsJoinShow(false)
   }
   const handleJoinCom = async (e)=>{
-     e.stopPropagation();
+      e.preventDefault();
+    //  e.stopPropagation();
     if(input.time===''||input.thing===''||input.content===''){
       setErr({open:true,msg:'请填写完整信息',status:"error"})
       return;
@@ -124,7 +125,7 @@ const Time = () => {
     }
     try{
       const url = await upload();
-      console.log(input)
+      console.log(url)
       const res = await axios.post('/auth/time',{...input,url});
      if(res.status===200){
       setErr({open:true,msg:"信息已流向时间线",status:"success"})
