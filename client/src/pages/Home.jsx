@@ -14,7 +14,7 @@ const Home = () => {
   console.log(cat)
   useEffect(() => {
     setIsLoad(false)
-    console.log(currentUser)
+    // console.log(currentUser)
     const fetchData = async () => {
       try {
         const res = await axios.get(`/posts${cat}`)
@@ -29,9 +29,6 @@ const Home = () => {
     }
     fetchData();
   }, [cat])
-
-
-
 
   return (
     <div className='home content'>

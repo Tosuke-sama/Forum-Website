@@ -20,6 +20,7 @@ import { AuthContextProvider } from './context/authContext.js';
 import Popup from './components/Popup.jsx';
 import Friendly from './pages/Friendly.jsx';
 import Time from './pages/Time.jsx';
+import Adventure from './pages/Adventure.jsx';
 // let isPopup = sessionStorage.getItem("popUp")||"true"
   // const [isPopup,setIsPopup] = useState(sessionStorage.getItem("popUp")||"true")
  
@@ -67,6 +68,10 @@ const router = createBrowserRouter([
       {
         path: "/time",
         element: <Time/>,
+      },
+      {
+        path: "/adventure",
+        element: <Adventure/>,
       },
   ],
   },

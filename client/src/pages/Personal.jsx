@@ -38,9 +38,9 @@ const Personal = () => {
       },
       callback: (FBX,animationStart) => {
         // camera.lookAt(model.position)
-        // animationStart()
+        animationStart()
         scene.add(FBX);
-        camera.lookAt(...FBX.position)
+        // camera.lookAt(...FBX.position)
       },
     });
     mountTo(mountElmt.current)

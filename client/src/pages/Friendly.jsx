@@ -41,6 +41,7 @@ const Friendly = () => {
       
     }
     return (
+    <div className='friendlyContain'>
     <div className='friendly'>
      {datas.map((item,index) => (
         <motion.div
@@ -68,7 +69,8 @@ const Friendly = () => {
         </motion.div>
      ))}
     </div>
-    
+    <div className='helpText'> 愿意加入世界线？请在<a href="https://github.com/Tosuke-sama/Forum-Website/issues"> GitHub</a> 中留下您的地址以及专属图片！</div>
+    </div>
   )
 }
 

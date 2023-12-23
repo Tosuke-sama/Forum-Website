@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 import { useState,useContext } from 'react'
 import axios from 'axios'
@@ -10,7 +10,14 @@ const Login = () => {
     username: '',
     password: '',
   });
-
+  useEffect(()=>{
+    QC.Login({
+      btnId:"qqLoginBtn",	//插入按钮的节点id
+      size:"A_XL",
+  },(reqData, opts)=>{
+   console.log(opts)
+  });
+  },[])
   const [err,setErr] = useState('')
   const  { login } = useContext(AuthContext)
 
@@ -34,6 +41,11 @@ const Login = () => {
       setErr(err.response.data.message)
     }
   }
+  const qqLogin = ()=>{
+    const res = QC.Login.showPopup( { appId:"102075120", redirectURI:"https://tosuke.top/login" })
+   
+  }
+ 
   return (
     <div className='auth'>
       
@@ -58,6 +70,7 @@ const Login = () => {
     <div className='buttons'>
     <button onClick={handlelogin}>登录</button>
     <button onClick={handleRegister}> 点击注册</button>
+    <div id='qqLoginBtn' className='qqLoogin' > <img src="../qq.png" alt="" /></div>
     </div>
     {/* <span> 还没有账户？<Link to={"/register"}>点击注册 </Link></span> */}
   </form> </motion.div>

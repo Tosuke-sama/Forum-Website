@@ -77,6 +77,7 @@ const Time = () => {
   const upload = async ()=>{
     if(img!=null){
       if(img.type !== "image/jpeg" && img.type !== "image/png" && img.type !== "image/jpg"){
+        setErr({open:true,msg:'图片格式不正确',status:"error"})
         return;
       }
     }
@@ -167,6 +168,7 @@ const Time = () => {
       <div className='timeButon'>
         <button onClick={hanleJoin}>加入时间线</button>
       </div>
+      <div className='helpText'> 时间线全世界共用，服务器中不会记载任何关于上传者的信息，所以安静的旁观吧，以陌生人的身份。</div>
       {isJoinShow&&<motion.div
         className='popup'
         initial={{ opacity: 0, scale: 0.5 }}
@@ -209,8 +211,11 @@ const Time = () => {
           </div>
           {/* <span> 还没有账户？<Link to={"/register"}>点击注册 </Link></span> */}
         </form>
-        <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      
+      </motion.div>}
+      <Popup click={handlePopup} isShow={isPopup} content={content}></Popup>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         open={err.open}
         autoHideDuration={3300}
         onClose={() => { setErr({open:false,msg:"",status:"error"}) }}
@@ -219,8 +224,6 @@ const Time = () => {
          {err?.msg}
         </Alert>
       </Snackbar>
-      </motion.div>}
-      <Popup click={handlePopup} isShow={isPopup} content={content}></Popup>
     </div>
   )
 }

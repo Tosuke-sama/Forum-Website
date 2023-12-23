@@ -29,7 +29,7 @@ const Popup = ({click, isShow,content}  = props) => {
             <div className='title2'>{content?.title2||""}</div>
             <div className='text'>{content?.explain}</div>
             <div className='end'>{content?.ending}</div>
-            {content?.url&&<img src={"../time/" + content?.url} alt="" />}
+            {content?.url&&<img src={"../timePhoto/" + content?.url} alt="" />}
             <div className='btn' onClick={handleClickMed}>好的</div>
         </motion.div>
     )
