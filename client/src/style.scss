@@ -1,4 +1,5 @@
 $lightGrenn : #b9e7e7;
+$lightGrenn1 : #b9e7e7;
 $imgBack : #b9e7e7;
 :root {
     --rotate-speed: 40;
@@ -214,7 +215,7 @@ $imgBack : #b9e7e7;
     footer{
         display: flex;
         flex-direction: column;
-        margin-top: 100px;
+        margin-top: 40px;
         .footer{
         padding: 20px;
         margin-top: 5px;
@@ -253,7 +254,8 @@ $imgBack : #b9e7e7;
     }
     //Home
     .home{
-        
+        // max-height: 1350px;
+        // overflow: hidden;
         .posts{
             margin-top: 50px;
             display: flex;
@@ -361,6 +363,12 @@ $imgBack : #b9e7e7;
                     }
                 }
             }
+        }
+        .Pagination {
+          margin-top: 5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
     }
     //single
@@ -1082,7 +1090,7 @@ $imgBack : #b9e7e7;
             padding: 5px;
             outline: none;
             cursor: pointer;
-            background-color: teal;
+            background-color: #FFEC8B;
             color: white;
         }
     }

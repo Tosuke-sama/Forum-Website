@@ -14,7 +14,7 @@ const Footer = () => {
        </div>
        <div className='footer'>
        <img src={Logo} />
-        <span> Tosuke 敬上 </span>
+        <span> ReDawn-Studio 敬上 </span>
        </div>
    </footer>
   )

@@ -4,11 +4,15 @@ import axios from 'axios';
 import ReactHtmlParser from 'react-html-parser';
 import { AuthContext } from '../context/authContext'
 import { Snackbar, Alert, Skeleton } from '@mui/material';
+import Pagination from '@mui/material/Pagination';
 import { motion } from "framer-motion";
+import Stack from '@mui/material/Stack';
 const Home = () => {
   const { open, currentUser, setOpen } = useContext(AuthContext)
   const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
+  const [pageNum,setPageNum] = useState(1);
   const location = useLocation();
   const cat = location.search;
   console.log(cat)
@@ -18,7 +22,9 @@ const Home = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/posts${cat}`)
-        setPosts(res.data)
+        setAllPosts(res.data)
+        console.log(allPosts)
+        setPosts(res.data.slice(4*(pageNum-1),4*(pageNum-1)+4))
         setTimeout(() => {
           setIsLoad(true)
         }, 1000);
@@ -30,6 +36,11 @@ const Home = () => {
     fetchData();
   }, [cat])
 
+  const onPageChange = (event,index) => {
+    console.log(index)
+    setPosts(allPosts.slice(4*(index-1),4*(index-1)+4))
+    setPageNum(index)
+  }
   return (
     <div className='home content'>
       {isLoad ? <div className="posts">
@@ -82,6 +93,9 @@ const Home = () => {
           欢迎回来，{currentUser?.username}，爱来自京介!
         </Alert>
       </Snackbar>
+      <Stack spacing={2} className='Pagination'>
+      <Pagination count={10} onChange={ onPageChange } size='large' page={pageNum} />
+    </Stack>
     </div>
 
   )
