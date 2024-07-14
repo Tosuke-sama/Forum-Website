@@ -212,7 +212,14 @@ const Navbar = () => {
           className='avaterMenu'>
           <div id='avaterbox' className='avaterMenubox'>You Get me!</div>
              </motion.div> </motion.span><Link className='link' to={`/Personal/${currentUser?.id}`}>
-          {currentUser && currentUser.img != "" ? <motion.img 
+          {currentUser && currentUser.img != "" ? currentUser.openid!=0?<motion.img 
+            id='avater'
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            variants={states}
+            initial={'hidden'}
+            animate={isHover?'show':'hidden'}
+            src={ currentUser.img} alt="" />: <motion.img 
             id='avater'
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}

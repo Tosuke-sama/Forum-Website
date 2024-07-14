@@ -26,15 +26,16 @@ import Adventure from './pages/Adventure.jsx';
  
 const Latout = () => {
   const [isPopup,setIsPopup] = useState(sessionStorage.getItem("popUp")||"true")
+  const [show,setShow] = useState(false);
   const handlePopup = ()=>{
     sessionStorage.setItem("popUp",false)
     setIsPopup(false)
-    // isPopup = "false"
   }
-  const [show,setShow] = useState(false);
+
   setTimeout(() => {
   setShow(true)
   }, 1000);
+
   return (
     <div>
       <Navbar/>
