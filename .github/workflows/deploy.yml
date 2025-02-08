@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies and build
         run: |
           cd client  #  package.json 在 frontend 目录
-          npm install
+          npm install --legacy-peer-deps # 忽略依赖包冲突
           npm run build  # 假设构建后生成 dist 目录
 
       # 步骤 3：通过 SSH 连接服务器并部署文件
