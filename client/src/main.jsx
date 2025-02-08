@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import Register from './pages/Register.jsx';
 import Home from './pages/Home.jsx';
-import Login from './pages/login.jsx';
+import Login from './pages/Login.jsx';
 import Write from './pages/write.jsx';
 import Single from './pages/Single.jsx';
 import Navbar from './components/Navbar.jsx';
