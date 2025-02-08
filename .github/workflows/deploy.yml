@@ -1,0 +1,36 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [master, test]  # 监听 master 和 test 分支的推送
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 步骤 1：拉取代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 步骤 2：安装依赖并构建（根据你的项目调整）
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build  # 假设构建后生成 dist 目录
+
+      # 步骤 3：通过 SSH 连接服务器并部署文件
+      - name: Deploy to Server
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: root  # 替换为你的服务器用户名
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # 删除服务器旧文件（谨慎操作）
+            rm -rf /www/wwwroot/dist/*
+            
+            # 将本地构建的 dist 目录上传到服务器
+            rsync -r -o StrictHostKeyChecking=no ./dist/* root@${{ secrets.SERVER_IP }}:/www/wwwroot/dist/
+            
+            # 可选：重启服务（如 Nginx、PM2）
+            systemctl restart nginx
