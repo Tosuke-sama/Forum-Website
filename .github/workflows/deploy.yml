@@ -15,6 +15,7 @@ jobs:
       # 步骤 2：安装依赖并构建（根据你的项目调整）
       - name: Install dependencies and build
         run: |
+          cd frontend  # 项目在 frontend 目录下
           npm install
           npm run build  # 假设构建后生成 dist 目录
 
