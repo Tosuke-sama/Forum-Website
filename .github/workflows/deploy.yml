@@ -20,7 +20,7 @@ jobs:
 
       # 步骤 3：通过 SSH 连接服务器并部署文件
       - name: Deploy to Server
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.SERVER_IP }}
           username: root  # 替换为你的服务器用户名
